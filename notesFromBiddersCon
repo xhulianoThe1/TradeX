@@ -1,0 +1,30 @@
+•	Dashboard landing upon login
+•	Historical what-ifs, going back 1 year
+•	Stocks are a must, but having as much information is highly preferred (bonds, crypto, forex, etc, surprise him)
+•	Refresh rate on data -> 24 hrs minimum on how old the data is… in the current iteration, we don’t want to have to sit and wait for live data, manual update is sufficient (time of login, but feel free to impress)
+•	Closing price
+•	Unlimited portfolios, or whatever the cap is
+•	Users -> the way as it stands, no stress test currently (number of concurrent users… tbd, but should be scalable)
+•	Graphs -> high lows, category discernments, pies, line graphs of price over time, price of asset, total value of portfolio over time, creativity (get creative with graphs, someone with financial sector knowledge preferred)
+•	Time zones and other languages not important, currency may be however in the future
+•	Self-sign on (admin access to create accounts if needed to be considered)
+•	Quality assurance -> customer inquiries may come up at some point but currently no specific requirements
+•	Theming, branding, colors/design -> no preferences, be creative and consistent
+•	Sign in -> I’ve noticed you haven’t done x in y amount of time are you still there? (not required by a good idea)
+•	In app refresh
+•	Upon removal of a stock, user won’t have to update chart if it is already open, refresh automatically
+•	Recent versions of chrome, firefox, and safari compatible (not IE)
+•	Performance should be responsive, 2-3 second response time
+•	Secure login – enforce password strength such as password length, multifactor not currently a requirement
+•	Operational requirements -> do not currently need remember my account, password, etc at this time
+•	Mobile -> let me get back to you
+•	Have someone different present each time
+
+
+
+
+1.	Establish team roles
+2.	Finesse more finite and nuanced terminology and tasks
+3.	Define the timebox in which we are going to discuss what we have accomplished
+4.	Documentation … excel spreadsheet vs word document uploaded to github
+5.	Spread out everything as to accomplish as much as possible while keeping it functional and of good quality
