@@ -1,0 +1,104 @@
+/* This file can be used to initialize a basic sample library dataset.
+   It creates the database, the table structure, and includes a few records
+   for each table.
+   Developed by Luke - 4/15/2019 */
+
+CREATE DATABASE LIBRARY_TEST;
+
+USE LIBRARY_TEST;
+
+
+/* CREATING THE TABLES IN OUR LIBRARY DATASET */
+
+/* Creating USER table */
+/* This file can be used to initialize a basic sample library dataset.
+   It creates the database, the table structure, and includes a few records
+   for each table.
+   Developed by Luke - 4/15/2019 */
+
+CREATE DATABASE LIBRARY_TEST;
+
+USE LIBRARY_TEST;
+
+
+/* CREATING THE TABLES IN OUR LIBRARY DATASET */
+
+/* Creating USER table */
+CREATE TABLE USER (
+	user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+	first_name VARCHAR(20), 
+	last_name VARCHAR(20), 
+	email VARCHAR(20) NOT NULL, 
+	password VARCHAR(20) NOT NULL, 
+	is_admin BOOLEAN, 
+	late_fees FLOAT
+);
+
+/* Creating BOOK table */
+CREATE TABLE BOOK (
+	book_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+	call_num VARCHAR(20), 
+	title VARCHAR(20) NOT NULL, 
+	author_id INT, 
+	publisher_id INT, 
+	year INT
+);
+
+/* Creating PUBLISHER table */
+CREATE TABLE PUBLISHER (
+	publisher_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+	publisher_name VARCHAR(20) NOT NULL, 
+	publisher_city VARCHAR(20)
+);
+
+/* Creating AUTHOR table */
+CREATE TABLE AUTHOR (
+	author_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+	first_name VARCHAR(20), 
+	last_name VARCHAR(20) NOT NULL
+);
+
+/* Creating OUT table */
+CREATE TABLE CHECK_OUT (
+	book_id INT NOT NULL, 
+	user_id INT NOT NULL, 
+	out_date DATE, 
+	due_date DATE, 
+	PRIMARY KEY (book_id, user_id)
+);
+
+
+/* NOW WE INSERT SAMPlE DATA INTO EACH DATA TABLE */
+
+/* Inserting sample patron*/
+INSERT INTO USER (first_name, last_name, email, password, is_admin, late_fees) 
+VALUES ('luke', 'lebel', 'sample_email@email', 'password', False, 0.00);
+
+/* Inserting sample administrator */
+INSERT INTO USER (first_name, last_name, email, password, is_admin, late_fees) 
+VALUES ('Natalie', 'Bates', 'natalie@mail.com', 'nataliepassword', True, 0.00);
+
+/* Inserting samle book */
+INSERT INTO BOOK (call_num, title, author_id, publisher_id, year)
+VALUES ('ABC', 'This book is great!', 1, 1, 2000);
+
+/* Inserting sample author */
+INSERT INTO AUTHOR (first_name, last_name) 
+VALUES('John', 'Doe');
+
+/* Inserting sample publisher */
+INSERT INTO PUBLISHER (publisher_name, publisher_city)
+VALUES('The Best Publisher', 'Albany, NY');
+
+/* Inserting sample checked-out book */
+INSERT INTO CHECK_OUT 
+VALUES (1, 1, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 2 WEEK));
+
+
+/* POSSIBLE USEFUL COMMANDS */
+
+/* Viewing the books (and users) checked out */
+SELECT book.title, user.first_name, user.last_name FROM check_out, user, book WHERE check_out.book_id = book.book_id AND check_out.user_id = user.user_id;
+
+/* Viewing the books NOT checked out */
+SELECT book.title FROM book WHERE book.book_id NOT IN (SELECT check_out.book_id FROM check_out);
