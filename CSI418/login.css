@@ -76,12 +76,11 @@ body{
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: blue;
   color: white;
 }
 
 .modal-body {padding: 2px 16px;}
-
 /* END OF MODAL CODE */ 
 
 
@@ -96,18 +95,17 @@ input[type=text], input[type=password] {
 
 button {
   font-family: candal;
-  background-color: palevioletred;
+  background-color: blue;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
-  border: 3px solid gray;
+  /*border: 3px solid gray;*/
   cursor: pointer;
   width: 20%;
 }
 
 button:hover {
-  background-color: firebrick;
-    
+  background-color: navy; 
 }
 
 /*form{

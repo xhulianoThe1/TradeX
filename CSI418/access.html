@@ -1,46 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
-      
 <title>TradeX</title>
-     <link rel="stylesheet" href="login.css">
-</head>
+<link rel="stylesheet" href="login.css">
 <body>
-
 <p id = "xuser"> Existing User </p>
 <p id="logo"> TradeX</p>
+
 <!-- The Modal -->
 <div id="myModal" class="modal">
-
-
-  <!-- Modal content -->
+<!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
-      <span class="close">&times;</span>
-      <h2>Existing User</h2>
+    <span class="close">&times;</span>
+    <h2>Log in</h2>
     </div>
-    <div class="modal-body">
-      <form action="validate.php" method="post">
+<div class="modal-body">
+  <form action="validate.php" method="post">
   <div class="container">
-    <label for="uname"><b>Enter Username: </b></label>
-    <input type="text" placeholder="Type here!" name="uname" required>
-      <br>
-    <label for="psw"><b> Enter Password: </b></label>
-    <input type="password" placeholder="Type here!" name="psw" required>
-      <br>
+    <label for="uname"><b></b></label>
+    <input type="text" placeholder="Enter Username!" name="uname" required>
+    <br>
+    <label for="psw"><b></b></label>
+    <input type="password" placeholder="Enter Password!" name="psw" required>
+    <br>
     <button type="submit">Login</button>
-     <br>
+    <br>
   </div>
-</form>
-    </div>    
+  </form>
+</div>    
   </div>
+    </div>
 
-</div>
-<!-- Modal --> 
+<!------------------------------------------------------------------------->  
 <script> 
   // When the user clicks the button, open the modal
   var modal = document.getElementById("myModal");
   var xuser = document.getElementById('xuser')  
+  //Closing the modal
+  var span = document.getElementsByClassName("close")[0]
   xuser.onclick = function() {
   modal.style.display = "block";
   }
@@ -48,7 +45,6 @@
 span.onclick = function() {
   modal.style.display = "none";
 }
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
@@ -56,9 +52,9 @@ window.onclick = function(event) {
   }
 }
 </script> 
-
-
 <!-------------------------------------------------------------------------> 
+
+
 <!-- The following is for the HYPONOS-->
     <style>
       * {
@@ -206,15 +202,10 @@ window.onclick = function(event) {
         initialize();
       })();
     </script>
-
     <!-- Third party -->
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     <!-- End of HYPNOS --> 
-    <!-------------------------------------------------------------------------> 
-
-
-
-
+    <!----------------------------------------------------------------------------------------------------------------------------->  
   </body>
 </html> 
 
