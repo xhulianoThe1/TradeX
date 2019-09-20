@@ -71,7 +71,7 @@ else if($isadmin == True){
     exit;
 }
 else{
-    header("Location: user.php");
+    header("Location: user.php?uname=$uname");
     exit;
 }
 
