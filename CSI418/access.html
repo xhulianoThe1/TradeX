@@ -3,10 +3,14 @@
 <title>TradeX</title>
 <link rel="stylesheet" href="login.css">
 <body>
-<p id = "xuser"> Sign in</p>
-<p id="logo"> TradeX</p>
 
-<!-- The Modal -->
+<div> 
+<p id = "xuser"> Sign in </p>
+<p id = "nuser"> Sign up</p>
+<p id="logo"> TradeX</p>
+</div>
+
+<!-- sign in modal -->
 <div id="myModal" class="modal">
 <!-- Modal content -->
   <div class="modal-content">
@@ -30,8 +34,7 @@
 </div>    
   </div>
     </div>
-
-<!------------------------------------------------------------------------->  
+<!-- Java script for the modal --> 
 <script> 
   // When the user clicks the button, open the modal
   var modal = document.getElementById("myModal");
@@ -46,9 +49,63 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 </script> 
+
+
+
 <!-------------------------------------------------------------------------> 
+<!-- sign up modal -->
+<div id="myModal2" class="modal2">
+<!-- Modal content -->
+  <div class="modal2-content">
+    <div class="modal2-header">
+    <span class="close2">&times;</span>
+    <h2>Sign up</h2>
+    </div>
+<div class="modal2-body">
+  <form action="validate.php" method="post">
+  <div class="container">
+    <label for="email"><b></b></label>
+    <input type="text" placeholder="Email!" name="email" required>
+    <br>
+    <label for="fname"><b></b></label>
+    <input type="text" placeholder="First name!" name="fname" required>
+    <br>
+    <label for="lname"><b></b></label>
+    <input type="text" placeholder="Last name!" name="lname" required>
+    <br>
+    <label for="uname"><b></b></label>
+    <input type="text" placeholder="Username!" name="uname" required>
+    <br>
+    <label for="psw"><b></b></label>
+    <input type="password" placeholder="Password!" name="psw" required>
+    <br>
+    <button type="submit">Sign up</button>
+    <br>
+  </div>
+  </form>
+</div>    
+  </div>
+    </div>
+    
+<!-- Java script for the signup modal --> 
+<script> 
+  // When the user clicks the button, open the modal
+  var modal2 = document.getElementById("myModal2");
+  var nuser = document.getElementById('nuser')  
+  //Closing the modal
+  var span2 = document.getElementsByClassName("close2")[0]
+  nuser.onclick = function() {
+  modal2.style.display = "block";
+  }
+  // When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+  modal2.style.display = "none";
+}
+</script> 
+ 
 
 
+<!-------------------------------------------------------------------------> 
 <!-- The following is for the HYPONOS-->
     <style>
       * {
@@ -196,11 +253,11 @@ span.onclick = function() {
         initialize();
       })();
     </script>
-    <!-- Third party -->
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    <!-- End of HYPNOS --> 
-    <!----------------------------------------------------------------------------------------------------------------------------->  
+    <!----------------------------------End of HYPNOS----------------------------------------------------------------->  
+    
   </body>
+  </html> 
  
  <!--  <footer>
     <p class="copyright">© GROUP Z 2019</p>
@@ -223,8 +280,6 @@ span.onclick = function() {
         bottom:0;
     }
 </style> -->
-</html> 
-
 
 <!-- 
     <form action="create.php" method="post">
