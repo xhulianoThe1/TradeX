@@ -5,17 +5,16 @@ body{
 #xuser{ 
   color: black;
   font-size: 16px;
-  text-align: right; 
-  position:relative;
+  text-align: fixed;
+  left: 500px; 
   cursor: pointer;
  }
+
 #logo{
     color: black;
     font-size: 84px;
     text-align: center;
-    /*position:relative;*/
 }
-
 
 /*---------------------------------------------------------- */ 
 /* The Modal (background) */
@@ -49,7 +48,7 @@ body{
   animation-duration: 0.4s
 }
 
-/* Add Animation */
+/* Animation */
 @-webkit-keyframes animatetop {
   from {top:-300px; opacity:0} 
   to {top:0; opacity:1}
