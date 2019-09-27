@@ -1,14 +1,17 @@
-/* This file can be used to initialize a basic sample library dataset.
+/* This initialization file has been adapted from the excerpt below for the purposes of our TradeX asset portfolio management application.
+It was worked on by Michael Nicholas along with the two partners mentioned below.
+
+"This file can be used to initialize a basic sample library dataset.
    It creates the database, the table structure, and includes a few records
    for each table.
    Developed by Luke - 4/15/2019 
    Updated by Luke 4/16/2019 - created stored procedure for checking in books
-   Updated by Natalie 4/22/2019 - added to checking in stored procedure but it still generates errors
+   Updated by Natalie 4/22/2019 - added to checking in stored procedure but it still generates errors"
    */
 
-CREATE DATABASE LIBRARY_TEST_2;
+CREATE DATABASE TRADEX_DATABASE;
 
-USE LIBRARY_TEST_2;
+USE TRADEX_DATABASE;
 
 
 /* CREATING THE TABLES IN OUR LIBRARY DATASET */
@@ -20,41 +23,20 @@ CREATE TABLE USER (
 	last_name VARCHAR(20), 
 	email VARCHAR(40) NOT NULL, 
 	password VARCHAR(20) NOT NULL, 
-	is_admin BOOLEAN, 
-	late_fees FLOAT DEFAULT 0.00
+	is_admin BOOLEAN 
 );
 
-/* Creating BOOK table */
-CREATE TABLE BOOK (
-	book_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-	call_num VARCHAR(20), 
-	title VARCHAR(100) NOT NULL, 
-	author_id INT, 
-	publisher_id INT, 
-	year INT
+/* Creating Stocks table */
+CREATE TABLE STOCKS (
+	stock_id VARCHAR(20) PRIMARY KEY NOT NULL, 
+	stock_name VARCHAR(20), 
+	lastTrade VARCHAR(100) NOT NULL 
 );
 
-/* Creating PUBLISHER table */
-CREATE TABLE PUBLISHER (
-	publisher_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-	publisher_name VARCHAR(30) NOT NULL, 
-	publisher_city VARCHAR(20)
-);
-
-/* Creating AUTHOR table */
-CREATE TABLE AUTHOR (
-	author_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-	first_name VARCHAR(20), 
-	last_name VARCHAR(20) NOT NULL
-);
-
-/* Creating CHECK_OUT table */
-CREATE TABLE CHECK_OUT (
-	book_id INT NOT NULL, 
-	user_id INT NOT NULL, 
-	out_date DATE, 
-	due_date DATE, 
-	PRIMARY KEY (book_id, user_id)
+/* Creating Portfolios table */
+CREATE TABLE PORTFOLIOS (
+	portfolio_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+	portfolio_name VARCHAR(20) 
 );
 
 
@@ -64,57 +46,22 @@ CREATE TABLE CHECK_OUT (
 
 /* NOW WE INSERT SAMPlE DATA INTO EACH DATA TABLE */
 
-/* Inserting sample patron*/
+/* Inserting sample end user*/
 INSERT INTO USER (first_name, last_name, email, password, is_admin) 
 VALUES
-	('Luke', 'Lebel', 'sample_email@mail.com', 'password', False),
-	('John', 'Smith', 'jsmith@mail.com', 'johnspassword', False),
-	('Nathaniel', 'Johnson', 'njohnson@mail.com', 'asdfjkl', False),
-	('Jane', 'Short', 'jshort@mail.com', 'anotherpassword', False)	
+	('John', 'Nicholas', 'jnicholas@yahoo.com', 'jnicholas123', False),
+	('George', 'Lopez', 'glopez@gmail.com', 'glopez123', False)
 ;
 
 /* Inserting sample administrator */
 INSERT INTO USER (first_name, last_name, email, password, is_admin) 
 VALUES
-	('Natalie', 'Bates', 'nbates@mail.com', 'p4ssw0rd', True),
-	('Michael', 'Nicholas', 'mnicholas@mail.com', 'p4ssw0rd', True)
+	('Michael', 'Nicholas', 'mnicholas@albany.edu', 'miken123', True),
+	('Vincent', 'Ballarano', 'vballarano@albany.edu', 'vinnyb123', True)
 ;
 
-/* Inserting sample book */
-INSERT INTO BOOK (call_num, title, author_id, publisher_id, year)
-VALUES
-	('ABC', 'This book is great!', 1, 1, 2000),
-	('ABD', 'To Kill A Mockingbird', 2, 2, 1960),
-	('ABE', 'The Great Gatsby', 3, 3, 1925),
-	('ABF', 'Tender is the Night', 3, 3, 1934),
-	('ABG', 'The Last Tycoon', 3, 3, 1941),
-	('ABH', 'The Grapes of Wrath', 4, 4, 1939),
-	('ABI', 'East of Eden', 4, 4, 1952),
-	('ABJ', 'Misery', 5, 4, 1987),
-	('ABK', 'It', 5, 4, 1986),
-	('ABL', 'Twilight', 6, 5, 2005),
-	('ABM', 'A Life in Parts', 7, 3, 2016),
-	('ABN', "Where'd You Go, Bernadette", 8, 5, 2012),
-	('ABO', 'Eleanor Oliphant is Completely Fine', 9, 4, 2017),
-	('ABP', 'The Bad Beginning (A Series of Unfortunate Events #1)', 10, 6, 1999)
-;
 
-/* Inserting sample author */
-INSERT INTO AUTHOR (first_name, last_name) 
-VALUES
-	('John', 'Doe'),
-	('Harper', 'Lee'),
-	('F. Scott', 'Fitzgerald'),
-	('John', 'Steinbeck'),
-	('Stephen', 'King'),
-	('Stephanie', 'Meyer'),
-	('Bryan', 'Cranston'),
-	('Maria', 'Semple'),
-	('Gail', 'Honeyman'),
-	('Lemony', 'Snicket')
-;
-
-/* Inserting sample publisher */
+/* Inserting sample publisher -- THIS WILL BE HELPFUL IN DETERMINING WHAT STARTING STOCKS TO INSERT INTO OUR STOCKS TABLE??
 INSERT INTO PUBLISHER (publisher_name, publisher_city)
 VALUES
 	('The Best Publisher', 'Albany, NY'),
@@ -123,40 +70,13 @@ VALUES
 	('Viking Press', 'New York'),
 	('Little, Brown and Company', 'Boston'),
 	('Scholastic', 'New York')
+    
+    
 ;
 
-
-/* Inserting sample checked-out book */
-INSERT INTO CHECK_OUT 
-VALUES (1, 1, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 2 WEEK));
-
-
-
+ */
 
 /* CREATING STORED PROCEDURES */
-
-
-/* Checking books back in procedure */
-DELIMITER //
-
-CREATE PROCEDURE checkInBook(IN bid INT)
-BEGIN
-	/* Delete record from CHECK_OUT table since book should no longer be checked out */
-	DELETE FROM CHECK_OUT 
-	WHERE CHECK_OUT.book_id = bid;
-END //
-DELIMITER ;
-
-
-/* Checking books out procedure */
-DELIMITER //
-
-CREATE PROCEDURE checkOutBook (IN book_id INT, IN user_id INT)
-BEGIN
-	INSERT INTO CHECK_OUT
-	VALUES (book_id, user_id, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 2 WEEK));
-END //
-DELIMITER ;
 
 
 /* Login information procedure */
@@ -168,12 +88,3 @@ BEGIN
 END //
 DELIMITER ;
 
-
-
-/* POSSIBLE USEFUL COMMANDS */
-
-/* Viewing the books (and users) checked out */
-SELECT book.title, user.first_name, user.last_name FROM check_out, user, book WHERE check_out.book_id = book.book_id AND check_out.user_id = user.user_id;
-
-/* Viewing the books NOT checked out */
-SELECT book.title FROM book WHERE book.book_id NOT IN (SELECT check_out.book_id FROM check_out);
