@@ -1,0 +1,12 @@
+{
+    "name": "vjbal/cs418",
+    "authors": [
+        {
+            "name": "vincentballarano",
+            "email": "vballarano@albany.edu"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^5.4"
+    }
+}
