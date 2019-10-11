@@ -2,15 +2,21 @@ var express = require('express');
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
+app.use(express.static('CSI418'));
 var http = require('http');
 var server = http.Server(app);
 
-app.use(express.static('CSI418'));
+app.set('view engine', 'ejs');
 
-server.listen(PORT, function() {
-  console.log('server running');
+app.get('/'. function(request, respond){
+	response.render('CSI418/index');
 });
 
+
+server.listen(PORT, function() {
+  console.log('server running', app.get('port'));
+});
+/*
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
