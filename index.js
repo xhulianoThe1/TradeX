@@ -21,6 +21,16 @@ io.on('connection', function(socket) {
 });
 
 /*
+app.post('/',function(req,res){
+   var username = req.body.username;
+   var htmlData = 'Hello:' + username;
+   res.send(htmlData);
+   console.log(htmlData);
+});
+
+app.listen(port);
+
+/*
 const port = 3000;
 
 var express = require('express'),
