@@ -1,20 +1,15 @@
+
+var PORT = process.env.PORT || 5000;
 var express = require('express');
 var app = express();
-app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static('CSI418'));
 var http = require('http');
 var server = http.Server(app);
 
-app.set('view engine', 'ejs');
-
-app.get('/'. function(request, respond){
-	response.render('CSI418/index');
-});
-
+app.use(express.static('CSI418'));
 
 server.listen(PORT, function() {
-  console.log('server running', app.get('port'));
+  console.log('server running');
 });
 
 var io = require('socket.io')(server);
@@ -24,6 +19,16 @@ io.on('connection', function(socket) {
     io.emit('message', msg);
   });
 });
+
+/*
+app.post('/',function(req,res){
+   var username = req.body.username;
+   var htmlData = 'Hello:' + username;
+   res.send(htmlData);
+   console.log(htmlData);
+});
+
+app.listen(port);
 
 /*
 const port = 3000;
