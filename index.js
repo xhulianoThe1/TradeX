@@ -1,4 +1,4 @@
-/*
+
 var PORT = process.env.PORT || 5000;
 var express = require('express');
 var app = express();
@@ -19,8 +19,8 @@ io.on('connection', function(socket) {
     io.emit('message', msg);
   });
 });
-*/
 
+/*
 const port = 3000;
 
 var express = require('express'),
@@ -50,3 +50,4 @@ app.post('/',function(req,res){
 });
 
 app.listen(port);
+*/
