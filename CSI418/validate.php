@@ -22,8 +22,10 @@ class TableRows extends RecursiveIteratorIterator {
     require "common.php";
 
 //boolean values for validation, login credentials
-$uname = $_POST['uname'];
-$psw = $_POST['psw'];
+if(isset($_POST['submit'])){}    
+    $uname = $_POST['uname'];
+    $psw = $_POST['psw'];
+}
 $uname = trim($uname);
 $psw = trim($psw);
 $indicator = False;
