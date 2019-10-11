@@ -1,7 +1,6 @@
-
-var PORT = process.env.PORT || 5000;
 var express = require('express');
 var app = express();
+app.set('port', (process.env.PORT || 5000));
 
 var http = require('http');
 var server = http.Server(app);
@@ -19,7 +18,6 @@ io.on('connection', function(socket) {
     io.emit('message', msg);
   });
 });
-
 
 /*
 const port = 3000;
