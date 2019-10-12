@@ -1,1 +1,1 @@
-web: vendor/
+web: CSI418 web/
