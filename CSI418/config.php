@@ -13,8 +13,8 @@ $dsn        = "mysql:host=$host;dbname=$dbname"; // will use later
 $options    = array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
               );
-
 */
+
 //mysql://bd9acdd9020e4f:c31a396a@us-cdbr-iron-east-05.cleardb.net/heroku_bf9276ba3a568af?reconnect=true
 
 

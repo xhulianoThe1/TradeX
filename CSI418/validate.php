@@ -64,7 +64,7 @@ try{
         $indicator = False;
     }
     if( $indicator == False){
-        header("Location: access.html");
+        header("Location: index.html");
     
     exit;
 }
