@@ -1,0 +1,99 @@
+/* This initialization file has been adapted from the excerpt below for the purposes of our TradeX asset portfolio management application.
+It was worked on by Michael Nicholas along with the two partners mentioned below. I've retained the original documentation with quotes.
+
+"This file can be used to initialize a basic sample library dataset.
+   It creates the database, the table structure, and includes a few records
+   for each table.
+   Developed by Luke - 4/15/2019 
+   Updated by Luke 4/16/2019 - created stored procedure for checking in books
+   Updated by Natalie 4/22/2019 - added to checking in stored procedure but it still generates errors"
+   */
+
+CREATE database tradex_database;
+
+USE tradex_database;
+
+
+/* CREATING THE TABLES IN OUR LIBRARY DATASET */
+
+/* Creating USER table */
+CREATE TABLE USER (
+	user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+	first_name VARCHAR(20), 
+	last_name VARCHAR(20), 
+	email VARCHAR(40) NOT NULL, 
+	password VARCHAR(20) NOT NULL, 
+	is_admin BOOLEAN 
+);
+
+/* Creating Stocks table */
+CREATE TABLE STOCKS (
+	ticker VARCHAR(20) PRIMARY KEY NOT NULL, 
+	stock_name VARCHAR(20)  
+);
+
+/* Creating Portfolios table... one user can have many portfolios, so we create a foreign key to establish this relationship */
+CREATE TABLE PORTFOLIOS (
+	portfolio_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+	portfolio_name VARCHAR(20),
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES USER(user_id)
+);
+
+/*This will act as a junction table to form a many to many relationship between stocks and portfolios */
+CREATE TABLE PORTFOLIOS_JUNCTION (
+    portfolio_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    ticker VARCHAR(20) NOT NULL,
+    FOREIGN KEY (portfolio_id) REFERENCES PORTFOLIOS(portfolio_id),
+    FOREIGN KEY (ticker) REFERENCES STOCKS(ticker)
+);
+
+
+
+
+
+
+/* NOW WE INSERT SAMPlE DATA INTO EACH DATA TABLE */
+
+/* Inserting sample end user*/
+INSERT INTO USER (first_name, last_name, email, password, is_admin) 
+VALUES
+	('John', 'Nicholas', 'jnicholas@yahoo.com', 'jnicholas123', False),
+	('George', 'Lopez', 'glopez@gmail.com', 'glopez123', False)
+;
+
+/* Inserting sample administrator */
+INSERT INTO USER (first_name, last_name, email, password, is_admin) 
+VALUES
+	('Michael', 'Nicholas', 'mnicholas@albany.edu', 'miken123', True),
+	('Vincent', 'Ballarano', 'vballarano@albany.edu', 'vinnyb123', True)
+;
+
+
+/* Inserting sample publisher -- THIS WILL BE HELPFUL IN DETERMINING WHAT STARTING STOCKS TO INSERT INTO OUR STOCKS TABLE??
+INSERT INTO PUBLISHER (publisher_name, publisher_city)
+VALUES
+	('The Best Publisher', 'Albany, NY'),
+	('J.B. Lippincott & Co.', 'Philadelphia'),
+	('Scribner', 'New York'),
+	('Viking Press', 'New York'),
+	('Little, Brown and Company', 'Boston'),
+	('Scholastic', 'New York')
+    
+    
+;
+
+ */
+
+/* CREATING STORED PROCEDURES */
+
+
+/* Login information procedure */
+DELIMITER //
+
+CREATE PROCEDURE loginInfo (IN em VARCHAR(20), IN pw VARCHAR(20))
+BEGIN
+	SELECT user_id FROM user WHERE email = em AND password = pw;
+END //
+DELIMITER ;
+
