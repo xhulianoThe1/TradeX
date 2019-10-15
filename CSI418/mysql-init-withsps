@@ -9,9 +9,11 @@ It was worked on by Michael Nicholas along with the two partners mentioned below
    Updated by Natalie 4/22/2019 - added to checking in stored procedure but it still generates errors"
    */
 
+/*
 CREATE database tradex_database;
 
 USE tradex_database;
+*/
 
 
 /* CREATING THE TABLES IN OUR LIBRARY DATASET */
