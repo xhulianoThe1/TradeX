@@ -19,7 +19,7 @@
     <h2>Log in</h2>
     </div>
 <div class="modal-body">
-  <form action="validate.php" method="submit">
+  <form action="validate.php" method="post">
   <div class="container">
     <label for="uname"><b></b></label>
     <input type="text" placeholder="Enter Username!" name="uname" required>
@@ -50,6 +50,55 @@ span.onclick = function() {
 }
 </script> 
 
+    
+    <!-- Create user php script -->
+    <?php
+
+
+if (isset($_POST['create'])) { 
+    require "config.php";
+    require "common.php";
+
+    try {
+      
+        /* This try block connects to the database and builds the SQL statement.
+         * It accesses the required information, and then inserts it into the user table using an
+         * insert command.
+        */
+
+        $connection = new PDO($dsn, $username, $password, $options);
+
+        $new_user = array(
+            "first_name" => $_POST['first_name'],
+            "last_name"  => $_POST['last_name'],
+            "email"     => $_POST['email'],
+            "password"   => $_POST['password'],
+            "is_admin" => 0,
+        );
+
+        $sql = sprintf(
+            "INSERT INTO %s (%s) values (%s)",
+            "user",
+            implode(", ", array_keys($new_user)),
+            ":" . implode(", :", array_keys($new_user))
+        );
+
+        $statement = $connection->prepare($sql);
+        $statement->execute($new_user);
+    } 
+    catch(PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+  }
+
+}
+?>
+
+
+<?php if (isset($_POST['submit']) && $statement) { ?>
+  > <?php echo $_POST['first_name']; ?> successfully added.
+<?php } ?>
+
+
 
 
 <!-------------------------------------------------------------------------> 
@@ -62,7 +111,7 @@ span.onclick = function() {
     <h2>Sign up</h2>
     </div>
 <div class="modal2-body">
-  <form action="validate.php" method="post">
+  <form method="post" onSubmit="return checkPassword(this)">
   <div class="container">
     <label for="email"><b></b></label>
     <input type="text" placeholder="Email!" name="email" required>
@@ -73,22 +122,41 @@ span.onclick = function() {
     <label for="lname"><b></b></label>
     <input type="text" placeholder="Last name!" name="lname" required>
     <br>
-    <label for="uname"><b></b></label>
-    <input type="text" placeholder="Username!" name="uname" required>
-    <br>
     <label for="psw"><b></b></label>
     <input type="password" placeholder="Password!" name="psw" required>
     <br>
-    <label for="psw"><b></b></label>
-    <input type="password" placeholder="Re-enter Password!" name="psw" required>
+    <label for="rpsw"><b></b></label>
+    <input type="password" placeholder="Re-enter Password!" name="rpsw" required>
     <br>
-    <button type="submit">Sign up</button>
+    <button type="submit" name= "create" value= "Submit">Sign up</button>
     <br>
   </div>
   </form>
 </div>    
   </div>
     </div>
+    
+<!-- Java script for password renentered correctly check -->
+    <script> 
+          
+            // Function to check Whether both passwords 
+            // is same or not. 
+            function checkPassword(form) { 
+                password1 = form.psw.value; 
+                password2 = form.rpsw.value; 
+  
+                // Passwords don't match return false     
+                if (password1 != password2) { 
+                    alert ("\nMake sure your passwords match before submitting!"); 
+                    return false; 
+                } 
+  
+                // If same return True. 
+                else{  
+                    return true; 
+                } 
+            } 
+        </script> 
     
 <!-- Java script for the signup modal --> 
 <script> 

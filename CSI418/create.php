@@ -8,7 +8,81 @@ Page for account creation and entry into user table, modified from my CS410 Libr
   * The second section of code builds the user interface, allowing for a new user to be created.
   */
 
+//retrieved from https://www.w3schools.com/php/php_mysql_select.asp
 
+class TableRows extends RecursiveIteratorIterator { 
+    function __construct($it) { 
+        parent::__construct($it, self::LEAVES_ONLY); 
+    }
+    function current() {
+        return parent::current();
+    }
+
+    function beginChildren() {
+        echo "<tr>"; 
+    } 
+
+    function endChildren() { 
+        echo "</tr>" . "\n";
+    } 
+} 
+    require "config.php";
+    require "common.php";
+
+$uname = "";
+$indicator = False;
+//boolean values for validation, login credentials
+if(isset($_POST['submit'])){    
+    $uname = $_POST['uname'];
+             $new_user = array(
+            "first_name" => $_POST['first_name'],
+            "last_name"  => $_POST['last_name'],
+            "email"     => $_POST['email'],
+            "password"   => $_POST['password'],
+            "is_admin" => 0,
+        );
+$uname = trim($uname);
+}
+
+
+// Create connection
+try{
+    $conn = new PDO($dsn, $username, $password, $options);
+    $stmt = $conn->prepare("SELECT email FROM user");
+    $stmt->execute();
+    
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+            if($v == $uname){
+                $indicator = True;
+                continue;
+        }
+    }
+    if($indicator){
+        echo "Email is currently attached to an existing account, please try again with a new email.";
+        header("Location: index.php");
+        exit;
+}
+    else{
+        echo "Account successfully created. Proceed to sign-in!";
+
+            $sql = sprintf(
+            "INSERT INTO %s (%s) values (%s)",
+            "user",
+            implode(", ", array_keys($new_user)),
+            ":" . implode(", :", array_keys($new_user))
+        );
+
+        $statement = $connection->prepare($sql);
+        $statement->execute($new_user);
+        header("Location: index.php");
+        exit;
+    }
+    }
+ catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
+/**
 if (isset($_POST['submit'])) { 
     require "config.php";
     require "common.php";
@@ -18,7 +92,7 @@ if (isset($_POST['submit'])) {
         /* This try block connects to the database and builds the SQL statement.
          * It accesses the required information, and then inserts it into the user table using an
          * insert command.
-        */
+        
 
         $connection = new PDO($dsn, $username, $password, $options);
 
@@ -29,8 +103,18 @@ if (isset($_POST['submit'])) {
             "password"   => $_POST['password'],
             "is_admin" => 0,
         );
+        
+        $currentUser = $_POST['email'];
+        $uname = trim($currentUser);
+        
+        $checkUser = sprintf("SELECT * FROM user WHERE email = @currentUser");
 
-        $sql = sprintf(
+       // if($checkUser != ''){
+     //       header("Location: index.php");
+      //      exit;
+      //  }
+          
+            $sql = sprintf(
             "INSERT INTO %s (%s) values (%s)",
             "user",
             implode(", ", array_keys($new_user)),
@@ -43,31 +127,6 @@ if (isset($_POST['submit'])) {
     catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
   }
-
 }
+*/
 ?>
-
-
-<?php require "templates/header.php"; ?>
-
-<?php if (isset($_POST['submit']) && $statement) { ?>
-  > <?php echo $_POST['first_name']; ?> successfully added.
-<?php } ?>
-
-<h2>Add a user</h2>
-
-<form method="post">
-    <label for="first_name">First Name</label>
-	<input type="text" name="first_name" id="first_name">
-	<label for="last_name">Last Name</label>
-	<input type="text" name="last_name" id="last_name">
-	<label for="email">Email Address</label>
-	<input type="text" name="email" id="email">
-	<label for="password">Password</label>
-	<input type="text" name="password" id="password">
-	<input type="submit" name="submit" value="Submit">
-</form>
-
-<a href="access.html">Back to home</a>
-
-<?php require "templates/footer.php"; ?>

@@ -19,7 +19,7 @@
     <h2>Log in</h2>
     </div>
 <div class="modal-body">
-  <form action="user.php" method="submit">
+  <form action="validate.php" method="submit">
   <div class="container">
     <label for="uname"><b></b></label>
     <input type="text" placeholder="Enter Username!" name="uname" required>

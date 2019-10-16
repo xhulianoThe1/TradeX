@@ -1,7 +1,6 @@
 <?php
 //retrieved from https://www.w3schools.com/php/php_mysql_select.asp
 
-
 class TableRows extends RecursiveIteratorIterator { 
     function __construct($it) { 
         parent::__construct($it, self::LEAVES_ONLY); 
@@ -64,7 +63,7 @@ try{
         $indicator = False;
     }
     if( $indicator == False){
-        header("Location: index.html");
+        header("Location: index.php");
     
     exit;
 }
@@ -81,3 +80,4 @@ else{
  catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
+?>

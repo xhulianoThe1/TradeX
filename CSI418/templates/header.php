@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Simple Database App</title>
+    <title>TradeX</title>
 
     <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <body>
-    <h1>Library Application</h1>
+    <h1>Portfolio Management Application</h1>
   </body>
 </html>
