@@ -72,33 +72,44 @@ if (isset($_POST['create'])) {
             "first_name" => $_POST['first_name'],
             "last_name"  => $_POST['last_name'],
             "email"     => $_POST['email'],
-            "password"   => $_POST['password'],
+            "password"   => $_POST['psw'],
             "is_admin" => 0,
         );
 
+        if(!(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))){
+            echo($_POST['email'] . " is not a valid email, account could not be created. Please try again with a valid email.");
+        }
+        
+        else{
+        $selectEmails = $connection->prepare("SELECT email FROM user WHERE email = :email");
+        $selectEmails->bindParam(':email', $_POST['email']);
+        $selectEmails->execute();
+        
+        if($selectEmails->rowCount() >0){
+            echo "<h1>Email is already attached to an account. Please try again with a new email.</h1>";
+        }
+        else{
+            
         $sql = sprintf(
             "INSERT INTO %s (%s) values (%s)",
             "user",
             implode(", ", array_keys($new_user)),
             ":" . implode(", :", array_keys($new_user))
         );
+        
+        echo("<h1>Successfully created account! Please proceed to login.</h1>");
 
         $statement = $connection->prepare($sql);
         $statement->execute($new_user);
     } 
+    }
+
+    }
     catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
   }
-
 }
 ?>
-
-
-<?php if (isset($_POST['submit']) && $statement) { ?>
-  > <?php echo $_POST['first_name']; ?> successfully added.
-<?php } ?>
-
-
 
 
 <!-------------------------------------------------------------------------> 
@@ -116,11 +127,11 @@ if (isset($_POST['create'])) {
     <label for="email"><b></b></label>
     <input type="text" placeholder="Email!" name="email" required>
     <br>
-    <label for="fname"><b></b></label>
-    <input type="text" placeholder="First name!" name="fname" required>
+    <label for="first_name"><b></b></label>
+    <input type="text" placeholder="First name!" name="first_name" required>
     <br>
-    <label for="lname"><b></b></label>
-    <input type="text" placeholder="Last name!" name="lname" required>
+    <label for="last_name"><b></b></label>
+    <input type="text" placeholder="Last name!" name="last_name" required>
     <br>
     <label for="psw"><b></b></label>
     <input type="password" placeholder="Password!" name="psw" required>
@@ -136,12 +147,21 @@ if (isset($_POST['create'])) {
   </div>
     </div>
     
-<!-- Java script for password renentered correctly check -->
+<!-- Java script for entering password correctly (reentered and meets strength requirements) -->
     <script> 
           
             // Function to check Whether both passwords 
             // is same or not. 
             function checkPassword(form) { 
+                var passRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+                /*password must contain
+                (?=.*[a-z])	The string must contain at least 1 lowercase alphabetical character
+                (?=.*[A-Z])	The string must contain at least 1 uppercase alphabetical character
+                (?=.*[0-9])	The string must contain at least 1 numeric character
+                (?=.[!@#\$%\^&])	The string must contain at least one special character
+                (?=.{8,})	The string must be eight characters or longer
+                example working password: 123Pd%aaaa
+                */
                 password1 = form.psw.value; 
                 password2 = form.rpsw.value; 
   
@@ -150,6 +170,11 @@ if (isset($_POST['create'])) {
                     alert ("\nMake sure your passwords match before submitting!"); 
                     return false; 
                 } 
+                
+                else if(!(password1.match(passRegex))){
+                    alert("Password does not meet strength requirements, please try again with a new password. Passwords must contain 1 lowercase letter, 1 uppercase letter, 1 numeric character, 1 special character (%,$,&,@,#,!), and must be 8 characters in length or longer.");
+                    return false;
+                }
   
                 // If same return True. 
                 else{  

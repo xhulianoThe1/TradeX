@@ -33,7 +33,7 @@ $uname = $_GET['uname'];
     <a href="#">Account Settings</a>
     <a href="#">Portfolios</a>
     <a href="#">Support</a>
-    <a href="index.html">Log Out</a>
+    <a href="index.php">Log Out</a>
   </div>
 </div>
 <div class="container">
