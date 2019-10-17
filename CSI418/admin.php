@@ -3,6 +3,13 @@
     
     This script creates the administrative landing page. It contains links to all of the 
     Administrative functions, listed below-->
+
+<form action="page2.php" method="POST">
+<input type="text" name="userName" required>
+<input type="password" name="password" required>
+<button type="submit" name="submit">Send!</button>
+</form>
+<?php
 if(!isset($_POST['submit']){
 	header('Location: index.php');
 	exit();
