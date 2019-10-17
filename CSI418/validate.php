@@ -68,7 +68,7 @@ try{
     exit;
 }
 else if($isadmin == True){
-    header("Location: admin.php");
+    header("Location: admin");
     exit;
 }
 else{
