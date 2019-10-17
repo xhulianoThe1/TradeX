@@ -1,15 +1,15 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [QSA,L]
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^ index.php [QSA,L]
 
 #Options -indexes
 
-#RewriteEngine on
+RewriteEngine on
 
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
 
-#RewriteRule ^(.*)$ $1.html
+RewriteRule ^(.*)$ $1.php
 
 #RewriteEngine On
 #RewriteCond %{REQUEST_FILENAME} !-f
