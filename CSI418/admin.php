@@ -25,4 +25,4 @@ if(!isset($_POST['submit']){
 </ul>
 
 <?php include "templates/footer.php"; ?>
-}
+}?>
