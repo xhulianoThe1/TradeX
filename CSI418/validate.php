@@ -63,7 +63,7 @@ try{
         $indicator = False;
     }
     if( $indicator == False){
-        header("Location: index.php");
+        header("Location: index");
     
     exit;
 }
