@@ -63,12 +63,12 @@ try{
         $indicator = False;
     }
     if( $indicator == False){
-        header("Location: index");
+        header("Location: index.php");
     
     exit;
 }
 else if($isadmin == True){
-    header("Location: admin");
+    header("Location: admin.php");
     exit;
 }
 else{

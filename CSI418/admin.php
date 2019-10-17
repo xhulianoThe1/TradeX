@@ -8,7 +8,7 @@
 
 <ul>
   <li>
-      <a href="doesntexistyet"><strong>You're on the admin page! This link doesn't go anywhere!</strong></a>
+      <a href="doesntexistyet.php"><strong>You're on the admin page! This link doesn't go anywhere!</strong></a>
   </li>
 
 </ul>
