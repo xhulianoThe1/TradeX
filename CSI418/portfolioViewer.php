@@ -14,36 +14,27 @@ Modified from my CS410 - Intro to Databases Final Project
 
 <?php include "templates/footer.php"; ?>
     -->
+
 <?php
-if(isset($_GET['uname'])){    
-    $uname = $_GET['uname'];
-        session_start();
-    $_SESSION['uname'] = $uname;
-}  
-else{
-    session_start();
-   
-    $uname = $_SESSION['uname'] ;
-}
-?>    
+
+//https://stackoverflow.com/questions/13135131/php-getting-variable-from-another-php-file
+   session_start();
+   $uname = $_SESSION['uname'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>User Landing Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-.panel-default:hover {
-    width:15%;
-    opacity:0.8;
-}
-.panel-default:hover img{
-	opacity: 0.6;
-}
 
 body{
     background: linear-gradient(to right top,#443C2C,#678C9C) fixed;
 }
 
+        .container{
+            text-align: center;
+        }
 .dropbtn {
   background-color: linear-gradient(to left top,azure, blue);
   color: darkslategray;
@@ -93,11 +84,11 @@ body{
 
 <!--https://stackoverflow.com/questions/11651366/php-pass-data-to-html-form  -->
 <div class="dropdown">
-  <button class="dropbtn">My Profile - <?php echo $uname ?></button>
+  <button class="dropbtn">My Profile - <?php echo $_SESSION['uname'] ?></button>
   <div class="dropdown-content">
     <a href="#">Account Settings (TBD)</a>
     <a href="#">Support (TBD)</a>
-    <a href="user.php">Portfolios </a>  
+    <a href="user.php">Portfolios </a>
     <a href="index.php">Log Out</a>
   </div>
 </div>
@@ -105,20 +96,16 @@ body{
 
 
     <div class="container">
-        <h1></h1>
-    
-    <div class="panel panel-default">
-        <div class="panel-body"><a href="portfolioViewer.php"><img src="plusText.png" alt="add portfolio image" /></a></div>
-    </div>
-    </div>
+        <h1>Portfolio Name</h1>
+
 
         <div class="portfolios">
-        <h1>Portfolios show up here:</h1>
-            <h2>Portfolio 1</h2>
-            <h2>Portfolio 2</h2>
+        <h1>{Portfolio Information Here}</h1>
+            <h2>{This is where the graphing and stuff would be}</h2>
     
+    </div>
+        <input type="text" placeholder="Search for a stock">
     </div>
     
 </body>
 </html>
-

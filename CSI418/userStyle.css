@@ -1,44 +1,5 @@
-//https://stackoverflow.com/questions/35764867/css-html-change-panel-on-hover
-.panel-default:hover {
-    background-color: grey;
-}
-.panel-default:hover img{
-	opacity: 0.5;
-}
 
-//https://www.w3schools.com/howto/howto_css_dropdown.asp
-.dropbtn {
-  background-color: azure;
-  color: darkslategray;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: azure;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: darkgreen;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: greenyellow;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: dimgrey;}
-</style>
+/*
+https://stackoverflow.com/questions/35764867/css-html-change-panel-on-hover
+https://www.w3schools.com/howto/howto_css_dropdown.asp
+*/
