@@ -108,7 +108,7 @@ body{
         <h1></h1>
     
     <div class="panel panel-default">
-        <div class="panel-body"><a href="localhost:3000"><img src="plusText.png" alt="add portfolio image" /></a></div>
+        <div class="panel-body"><a href="/localhost:3000"><img src="plusText.png" alt="add portfolio image" /></a></div>
     </div>
     </div>
 
