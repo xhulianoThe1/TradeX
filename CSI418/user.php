@@ -111,13 +111,14 @@ body{
         <div class="panel-body"><a href="localhost:3000"><img src="plusText.png" alt="add portfolio image" /></a></div>
     </div>
     </div>
-
+<!--
         <div class="portfolios">
         <h1>Portfolios show up here:</h1>
             <h2>Portfolio 1</h2>
             <h2>Portfolio 2</h2>
     
     </div>
+-->
     
 </body>
 </html>
