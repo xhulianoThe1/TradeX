@@ -53,6 +53,10 @@ span.onclick = function() {
     
     <!-- Create user php script -->
     <?php
+    
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
 
 
 if (isset($_POST['create'])) { 
@@ -77,7 +81,7 @@ if (isset($_POST['create'])) {
         );
 
         if(!(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))){
-            echo($_POST['email'] . " is not a valid email, account could not be created. Please try again with a valid email.");
+            phpAlert($_POST['email'] . " is not a valid email, account could not be created. Please try again with a valid email.");
         }
         
         else{
@@ -86,7 +90,7 @@ if (isset($_POST['create'])) {
         $selectEmails->execute();
         
         if($selectEmails->rowCount() >0){
-            echo "<h1>Email is already attached to an account. Please try again with a new email.</h1>";
+            phpAlert("Email is already attached to an account. Please try again with a new email.");
         }
         else{
             
@@ -96,8 +100,8 @@ if (isset($_POST['create'])) {
             implode(", ", array_keys($new_user)),
             ":" . implode(", :", array_keys($new_user))
         );
-        
-        echo("<h1>Successfully created account! Please proceed to login.</h1>");
+
+        phpAlert("Account successfully created! Please proceed to sign in.");
 
         $statement = $connection->prepare($sql);
         $statement->execute($new_user);
