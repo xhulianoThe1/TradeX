@@ -15,21 +15,41 @@ Modified from my CS410 - Intro to Databases Final Project
 <?php include "templates/footer.php"; ?>
     -->
 <?php
+session_start();
+$_SESSION['timestamp'] = time();
+$_SESSION['inactive'] = false;
+
+//checks to see if the user is actually logged in
+if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
+    header('location: index.php');
+    exit;
+}
+/*
 if(isset($_GET['uname'])){    
     $uname = $_GET['uname'];
         session_start();
     $_SESSION['uname'] = $uname;
 }  
+*/
 else{
-    session_start();
+   // session_start();
    
     $uname = $_SESSION['uname'] ;
 }
+
+
 ?>    
 <!DOCTYPE html>
 <html>
 <head>
     <title>User Landing Page</title>
+    
+<script>
+    window.onload = function() {
+  inactivityTime(); 
+}
+    </script>    
+    
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
 .panel-default:hover {
@@ -92,13 +112,17 @@ body{
 <body>
 
 <!--https://stackoverflow.com/questions/11651366/php-pass-data-to-html-form  -->
+    
+    
 <div class="dropdown">
   <button class="dropbtn">My Profile - <?php echo $uname ?></button>
   <div class="dropdown-content">
     <a href="#">Account Settings (TBD)</a>
     <a href="#">Support (TBD)</a>
     <a href="user.php">Portfolios </a>  
-    <a href="index.php">Log Out</a>
+    <a href="logout.php">Log Out</a>
+   
+      
   </div>
 </div>
 
@@ -119,7 +143,36 @@ body{
     
     </div>
 -->
+    <script>
+    //  https://stackoverflow.com/questions/667555/how-to-detect-idle-time-in-javascript-elegantly?page=1&tab=votes#tab-top
+    var inactivityTime = function () {
+    var time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+    document.onkeypress = resetTimer;
+    document.onmousedown = resetTimer; // touchscreen presses
+    document.ontouchstart = resetTimer;
+    document.onclick = resetTimer;     // touchpad clicks
+    document.onkeypress = resetTimer;
+
+        //this is a separate logout page for users who are automatically logged out
+    function logout() {
+        location.href = 'inactiveLogout.php';
+        
+    }
+
+    function resetTimer() {
+        clearTimeout(time);
+        time = setTimeout(logout, 900000)
+        // 1000 milliseconds = 1 second, so 900000 is 15 minutes
+    }
+};
+   </script> 
     
 </body>
 </html>
+
+
+
 
