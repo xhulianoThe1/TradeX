@@ -15,13 +15,22 @@ Modified from my CS410 - Intro to Databases Final Project
 <?php include "templates/footer.php"; ?>
     -->
 <?php
+session_start();
+
+//checks to see if the user is actually logged in
+if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
+    header('location: index.php');
+    exit;
+}
+/*
 if(isset($_GET['uname'])){    
     $uname = $_GET['uname'];
         session_start();
     $_SESSION['uname'] = $uname;
 }  
+*/
 else{
-    session_start();
+   // session_start();
    
     $uname = $_SESSION['uname'] ;
 }
@@ -98,7 +107,7 @@ body{
     <a href="#">Account Settings (TBD)</a>
     <a href="#">Support (TBD)</a>
     <a href="user.php">Portfolios </a>  
-    <a href="index.php">Log Out</a>
+    <a href="logout.php">Log Out</a>
   </div>
 </div>
 
