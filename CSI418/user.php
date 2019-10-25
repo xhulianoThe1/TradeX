@@ -156,6 +156,7 @@ body{
     document.onclick = resetTimer;     // touchpad clicks
     document.onkeypress = resetTimer;
 
+        //this is a separate logout page for users who are automatically logged out
     function logout() {
         location.href = 'inactiveLogout.php';
         
