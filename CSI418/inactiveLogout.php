@@ -12,7 +12,7 @@ session_destroy();
 
 session_start();
 
-$_SESSION['inactive'] = false;
+$_SESSION['inactive'] = true;
 
 // Redirect to login page
 header("location: index.php");

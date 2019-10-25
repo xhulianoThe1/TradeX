@@ -16,6 +16,8 @@ Modified from my CS410 - Intro to Databases Final Project
     -->
 <?php
 session_start();
+$_SESSION['timestamp'] = time();
+$_SESSION['inactive'] = false;
 
 //checks to see if the user is actually logged in
 if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
@@ -34,11 +36,20 @@ else{
    
     $uname = $_SESSION['uname'] ;
 }
+
+
 ?>    
 <!DOCTYPE html>
 <html>
 <head>
     <title>User Landing Page</title>
+    
+<script>
+    window.onload = function() {
+  inactivityTime(); 
+}
+    </script>    
+    
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
 .panel-default:hover {
@@ -101,6 +112,8 @@ body{
 <body>
 
 <!--https://stackoverflow.com/questions/11651366/php-pass-data-to-html-form  -->
+    
+    
 <div class="dropdown">
   <button class="dropbtn">My Profile - <?php echo $uname ?></button>
   <div class="dropdown-content">
@@ -108,6 +121,8 @@ body{
     <a href="#">Support (TBD)</a>
     <a href="user.php">Portfolios </a>  
     <a href="logout.php">Log Out</a>
+   
+      
   </div>
 </div>
 
@@ -128,7 +143,35 @@ body{
     
     </div>
 -->
+    <script>
+    //  https://stackoverflow.com/questions/667555/how-to-detect-idle-time-in-javascript-elegantly?page=1&tab=votes#tab-top
+    var inactivityTime = function () {
+    var time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+    document.onkeypress = resetTimer;
+    document.onmousedown = resetTimer; // touchscreen presses
+    document.ontouchstart = resetTimer;
+    document.onclick = resetTimer;     // touchpad clicks
+    document.onkeypress = resetTimer;
+
+    function logout() {
+        location.href = 'inactiveLogout.php';
+        
+    }
+
+    function resetTimer() {
+        clearTimeout(time);
+        time = setTimeout(logout, 900000)
+        // 1000 milliseconds = 1 second, so 900000 is 15 minutes
+    }
+};
+   </script> 
     
 </body>
 </html>
+
+
+
 

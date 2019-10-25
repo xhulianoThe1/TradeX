@@ -54,6 +54,15 @@ span.onclick = function() {
     <!-- Create user php script -->
     <?php
     session_start();
+    
+    if(isset($_SESSION['inactive'])){
+        if($_SESSION['inactive'] == true){
+            phpAlert("You have been automatically logged out due to being inactive for too long.");
+        
+        // Set our inactive marker back to false;
+            $_SESSION['inactive'] = false;
+        }
+    }
 
     
 function phpAlert($msg) {
