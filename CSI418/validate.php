@@ -1,6 +1,8 @@
 <?php
 //retrieved from https://www.w3schools.com/php/php_mysql_select.asp
 
+session_start();
+
 class TableRows extends RecursiveIteratorIterator { 
     function __construct($it) { 
         parent::__construct($it, self::LEAVES_ONLY); 
@@ -24,9 +26,9 @@ class TableRows extends RecursiveIteratorIterator {
 if(isset($_POST['submit'])){    
     $uname = $_POST['uname'];
     $psw = $_POST['psw'];
+    $psw = trim($psw);
 }
 $uname = trim($uname);
-$psw = trim($psw);
 $indicator = False;
 $isadmin = False;
 $pswObtained = False;
@@ -39,6 +41,7 @@ try{
     
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
     foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
+        
         if(($v == 1) && ($pswObtained == True)){
             $isadmin = True;
             break;
@@ -53,7 +56,7 @@ try{
             $indicator = True;
             continue;
         }
-        else if($v == $psw){
+        else if(password_verify($psw,$v)){
             if($indicator == True){
                 $pswObtained = True;
                 continue;
@@ -72,7 +75,10 @@ else if($isadmin == True){
     exit;
 }
 else{
-    header("Location: user.php?uname=$uname");
+    //session_start();
+    $_SESSION['loggedIn'] = true;
+    $_SESSION['uname'] = $uname;
+    header("Location: user.php");
     exit;
 }
 
