@@ -132,7 +132,7 @@ body{
         <h1></h1>
     
     <div class="panel panel-default">
-        <div class="panel-body"><a href="src/BaseObject.php"><img src="plusText.png" alt="add portfolio image" /></a></div>
+        <div class="panel-body"><a href="BaseObject.php"><img src="plusText.png" alt="add portfolio image" /></a></div>
     </div>
     </div>
 <!--
