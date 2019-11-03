@@ -3,7 +3,7 @@
 <head>
 	<title>Testing highcharts</title>
 	<script
-  src="http://code.jquery.com/jquery-3.4.1.min.js"
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
@@ -17,7 +17,7 @@
 
 <script>
 $(function () { 
-   $('#container').highcharts({
+	$('#container').highcharts({
     chart: {
         type: 'line'
     },
