@@ -28,7 +28,7 @@
       </li>
       <!-- User Manual links -->
       <li class="nav-item">
-        <a class="nav-link" href="UserManual.html">User Manual</a>
+        <a class="nav-link" href="UserManual.php">User Manual</a>
       </li>
       <!-- Settings links -->
       <li class="nav-item">
