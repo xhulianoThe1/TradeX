@@ -7,7 +7,7 @@ session_start();
 // Unset all of the session variables
 $_SESSION = array();
  
-// Destroy the session.
+// Destroy the current session.
 session_destroy();
 
 session_start();
@@ -19,3 +19,4 @@ header("location: index.php");
 exit;
 
 ?>
+

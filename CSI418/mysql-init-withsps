@@ -98,4 +98,3 @@ BEGIN
 	SELECT user_id FROM user WHERE email = em AND password = pw;
 END //
 DELIMITER ;
-

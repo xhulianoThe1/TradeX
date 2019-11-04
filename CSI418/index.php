@@ -404,9 +404,3 @@ span2.onclick = function() {
         bottom:0;
     }
 </style> -->
-
-<!-- 
-    <form action="create.php" method="post">
-    <button type="submit">New User? Create an account here!</button>
-    </form>
- -->    
