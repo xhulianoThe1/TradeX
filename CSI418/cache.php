@@ -1,7 +1,5 @@
 <?php
-	//--------------------------------------------------------------
 	// Example: Quandl API with Cache
-	//--------------------------------------------------------------
 	require_once "quandl.php";
 	$api_key = "AFC6PLKDBUUJRNP7";
 	$quandl = new Quandl($api_key, "csv");
