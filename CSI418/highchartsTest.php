@@ -30,7 +30,7 @@ else{
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script
-  src="http://code.jquery.com/jquery-3.4.1.min.js"
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
@@ -119,7 +119,7 @@ else{
 
 <script>
 $(function () { 
-   $('#container').highcharts({
+	$('#container').highcharts({
     chart: {
         type: 'line'
     },
