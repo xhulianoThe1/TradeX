@@ -145,7 +145,7 @@ else{
 $(function () { 
 	$('#container').highcharts({
     chart: {
-        type: 'line'
+        type: 'pie'
     },
     title: {
         text: 'Fruit Consumption'
