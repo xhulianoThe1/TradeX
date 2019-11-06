@@ -90,7 +90,7 @@ else{
     <ul class="navbar-nav">
       <!-- landing Page link -->
       <li class="nav-item">
-        <a class="nav-link" href="HighchartsTest.php">Line</a>
+        <a class="nav-link" href="highchartsTest.php">Line</a>
       </li>
       <!-- Portfolio Viewer Page link -->
       <li class="nav-item">
