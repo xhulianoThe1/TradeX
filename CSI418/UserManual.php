@@ -18,7 +18,7 @@
 <body>
     
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" id ="nav">
-  <a class="navbar-brand" href="#">Trade X</a>
+  <a class="navbar-brand" href="#">Trade X <?php echo $uname ?></a>
    <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
