@@ -1,0 +1,187 @@
+body{
+    background-color: #678C9C;
+}
+
+#xuser{ 
+  color: white;
+  font-size: 16px;
+ 
+  cursor: pointer;
+ }
+
+ #nuser{ 
+  color: white;
+  font-size: 16px;
+  
+  cursor: pointer;
+  }
+
+#logo{
+    color: black;
+    font-size: 84px;
+    text-align: center;
+    padding: 0px;
+}
+
+#help
+{
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0px;
+}
+/*-------------------------Sign in modal--------------------------------- */ 
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed; 
+  z-index: 50; 
+  padding-top: 50px; 
+  left: 0;
+  top: 0;
+  overflow: auto; 
+
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid black;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: blue;
+  color: white;
+}
+
+.modal-body {
+  padding: 2px 16px;
+}
+/* END OF sign in MODAL CODE */ 
+/*-----------------------------------------------------*/ 
+
+
+/* Sign up modal */ 
+/* The Modal (background) */
+.modal2 {
+  display: none;
+  position: fixed; 
+  z-index: 50; 
+  padding-top: 50px; 
+  left: 0;
+  top: 0;
+  overflow: auto;
+
+}
+
+/* Modal Content */
+.modal2-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid black;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  
+}
+
+/* Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close2 {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close2:hover,
+.close2:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal2-header {
+  padding: 2px 16px;
+  background-color: blue;
+  color: white;
+}
+
+.modal2-body {
+  padding: 2px 16px;
+}
+/* End of sign up modal code */ 
+/*----------------------------------------------------------------------------*/ 
+
+input[type=text], input[type=password] {
+  font-family: candal;
+  width: auto;
+  padding: 6px 15px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 3px solid gray;
+}
+
+button {
+  font-family: candal;
+  background-color: blue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  cursor: pointer;
+  width: 30%;
+}
+
+button:hover {
+  background-color: navy; 
+}
