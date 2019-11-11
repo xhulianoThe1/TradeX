@@ -66,7 +66,7 @@ else{
       </li>
       <!-- User Manual link -->
       <li class="nav-item">
-        <a class="nav-link" href="UserManual.php">User Manual</a>
+        <a class="nav-link" href="UserManual.php"x>User Manual</a>
       </li>
       <!-- Settings link-->
       <li class="nav-item">

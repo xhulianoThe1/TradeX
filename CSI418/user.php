@@ -60,10 +60,6 @@ else{
       <li class="nav-item">
         <a class="nav-link" href="user.php">Portfolios</a>
       </li>
-      <!-- Portfolio Viewer Page link -->
-      <li class="nav-item">
-        <a class="nav-link" href="highchartsTest.php">Graphical Viewer</a>
-      </li>
       <!-- User Manual link -->
       <li class="nav-item">
         <a class="nav-link" href="UserManual.php">User Manual</a>
@@ -82,6 +78,13 @@ else{
 </nav>
 
     <!--Content Div's-->
+    <h2><b> Create New Portfolio:</b></h2>
+    <form action="createPortfolio.php" method="post">
+<strong>Enter portfolio name here: </strong><input type="text" name="portfolioName" placeholder="'Portfolio Name'" autocomplete="off"><br>
+<input type="submit">
+</form>
+    <br>
+    
     
  <script>
     //  https://stackoverflow.com/questions/667555/how-to-detect-idle-time-in-javascript-elegantly?page=1&tab=votes#tab-top
@@ -109,7 +112,106 @@ else{
     }
 };
    </script> 
+    
+  <?php
+    $_SESSION['nameOfPortfolio'] ='';
+    require "config.php";
+    require "common.php";
+echo "<table style='border: solid 1px black;'>";
+ echo "<h2><b>Portfolios<b><h2></tr>";
+
+class TableRowsZ extends RecursiveIteratorIterator {
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
+
+    function current() {
+        return "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;'>" . parent::current(). "</td>";
+    }
+
+    function beginChildren() {
+        echo "<tr>";
+    }
+
+    function endChildren() {
+        echo "</tr>" . "\n";
+                echo '<td> <form action="getPortfolioName.php" method="post"><br><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></form>  ';
+                echo ' <form action="deletePortfolio.php" method="post"><br><input type="submit" name= "'.$_SESSION['$currentId'].'"value="Delete ' .$_SESSION['nameOfPortfolio'].' from Portfolios"></form> </td>';
+    }
+}
+      class TableRows extends RecursiveIteratorIterator {
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
+
+    function current() {
+        return "<td style='width: 150px; border: 3px solid black;  font-size:25px;'>" . parent::current(). "</td>";
+    }
+
+    function beginChildren() {
+        echo "<tr>";
+    }
+
+    function endChildren() {
+        echo "</tr>" . "\n";
+
+    }
+}
+
+//    $stmt = $connection->prepare("SELECT portfolio_name, ticker
+//FROM portfolios, stocks
+//WHERE portfolios.user_id =:user_id");
+      
+      
+      
+
+
+try {
+    $connection = new PDO($dsn, $username, $password, $options);
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $portfolioNames = $connection->prepare("SELECT portfolio_name FROM portfolios WHERE portfolios.user_id =:user_id");
+    $portfolioNames->execute(['user_id'=>$_SESSION["user_id"]]);
+
+    // set the resulting array to associative
+    $result = $portfolioNames->setFetchMode(PDO::FETCH_ASSOC);
+    
+        $getPortfolioId = $connection->prepare("SELECT portfolio_id FROM portfolios WHERE portfolios.user_id =:user_id");
+        $getPortfolioId->execute(['user_id'=>$_SESSION["user_id"]]);
+        //$portfolio_id = $getPortfolioId->setFetchMode(PDO::FETCH_ASSOC);
+        $getPortfolioId = $getPortfolioId->fetchAll();
+    
         
+    $printPortfolioNames = $connection->prepare("SELECT portfolio_name FROM portfolios WHERE portfolios.user_id =:user_id");
+    $printPortfolioNames->execute(['user_id'=>$_SESSION["user_id"]]);
+            $printPortfolioNames = $printPortfolioNames->fetchAll();
+        $counter = 0;
+  // echo array_unique($getPortfolioId[$counter]);
+    
+    foreach(new TableRowsZ(new RecursiveArrayIterator($portfolioNames->fetchAll())) as $k=>$v) {
+        echo $v;
+       // $_SESSION['nameOfPortfolio'] = ltrim($v, "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;'>");
+       // $_SESSION['nameOfPortfolio'] = str_replace("</td>","",$_SESSION['nameOfPortfolio']);
+         $_SESSION['nameOfPortfolio'] = implode("",array_unique($printPortfolioNames[$counter]));
+        
+        $_SESSION['$currentId'] = implode("",array_unique($getPortfolioId[$counter]));
+                        $counter = $counter + 1;
+        $retrieveTickers = $connection->prepare("SELECT ticker FROM stocks WHERE portfolio_id=:pid");
+        $retrieveTickers->execute(['pid'=>$_SESSION['$currentId']]);
+
+        $result2 = $retrieveTickers->setFetchMode(PDO::FETCH_ASSOC);
+
+            foreach(new TableRows(new RecursiveArrayIterator($retrieveTickers->fetchAll())) as $o=>$p) {
+                echo $p;
+            }
+        
+    }
+}
+catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+echo "</table>";
+
+?>
    
 </body>
 </html>

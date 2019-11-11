@@ -32,10 +32,6 @@
       <li class="nav-item">
         <a class="nav-link" href="user.php">Portfolios</a>
       </li>
-      <!-- Portfolio Viewer Page link -->
-      <li class="nav-item">
-        <a class="nav-link" href="highchartsTest.php">Graphical Viewer</a>
-      </li>
       <!-- User Manual link -->
       <li class="nav-item">
         <a class="nav-link" href="UserManual.php">User Manual</a>

@@ -76,8 +76,15 @@ else if($isadmin == True){
 }
 else{
     //session_start();
+        
+    $getId = $conn->prepare("SELECT user_id FROM user WHERE email =:uname");
+    $getId->execute(['uname'=>$uname]);
+    $getId = $getId->fetch();
+    $getId = array_unique($getId);
+    $getId = implode("",$getId);
     $_SESSION['loggedIn'] = true;
     $_SESSION['uname'] = $uname;
+    $_SESSION['user_id'] = $getId;
     header("Location: user.php");
     exit;
 }
