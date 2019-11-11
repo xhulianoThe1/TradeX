@@ -1,8 +1,8 @@
 <?php
-    
+    session_start();
     require "config.php";
     require "common.php";
-session_start();
+
 foreach ($_POST as $name => $val)
 {
      $_SESSION['nameOfTicker'] =  htmlspecialchars($name);
@@ -22,8 +22,8 @@ try {
 ];
     
     $stmt->execute($data);
-    header("Location: displayHighstocks.php");
-    exit;
+   header("Location: displayHighstocks.php");
+   exit;
 }
 catch(PDOException $e)
     {

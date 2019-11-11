@@ -25,7 +25,6 @@ function changeTicker($fullName) {
 };
 
 $tickerToAdd = changeTicker($fullName);
-//$tickerToAdd = "\,\'".$tickerToAdd."\'";
 
 try {
     $connection = new PDO($dsn, $username, $password, $options);
@@ -52,27 +51,3 @@ catch(PDOException $e)
 
 
 ?>
-
-<!--
-    function testFunction(result){
-        var isTicker = false;
-        var ticker = [];
-        var len = result.value.length;
-        for(var i = 0; i <= len; i++){
-            if(result.value[i] == "("){
-                isTicker = true;
-                continue;
-            }
-            else if(isTicker == true){
-                if(result.value[i] == ")"){
-                    var newTicker = (ticker.join(''));
-                    return newTicker;
-                    break;
-                }
-                else{
-                ticker.push(result.value[i]);
-            }
-            }
-        }
-    }
--->

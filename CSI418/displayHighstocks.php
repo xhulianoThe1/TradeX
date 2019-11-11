@@ -150,8 +150,6 @@ else{
 ?>
 
 <script>
-  // for (i = 0; i < tickers.length; i++)
-  //alert((i+1) + ": " + tickers[i]);
 var seriesOptions = [],
   seriesCounter = 0,
  
@@ -3595,7 +3593,6 @@ autocomplete(document.getElementById("myInput"), tickers);
 </script>
     
    <?php
-    $_SESSION['nameOfPortfolio'] ='';
 echo "<table style='border: solid 1px black;'>";
  echo "<h2><b>Stocks in Current Portfolio:<b><h2></tr>";
 
@@ -3606,23 +3603,20 @@ echo "<table style='border: solid 1px black;'>";
     }
 
     function current() {
-        return "<td style='width: 150px; border: 2px solid black;'>" . parent::current(). "</td>";
+        return "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:20px;'>" . parent::current(). "</td>";
     }
 
     function beginChildren() {
-        echo "<tr>";
+        echo "<tr style='  background-color: #4CAF50; color: white;'>";
     }
 
     function endChildren() {
         echo "</tr>" . "\n";
-        echo '<td> <form action="removeStock.php" method="post"><br><input type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
+        echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
 
     }
 }
 
-//    $stmt = $connection->prepare("SELECT portfolio_name, ticker
-//FROM portfolios, stocks
-//WHERE portfolios.user_id =:user_id");
 
 try {
     $connection = new PDO($dsn, $username, $password, $options);
@@ -3636,7 +3630,7 @@ try {
             foreach(new TableRows(new RecursiveArrayIterator($retrieveTickers->fetchAll())) as $o=>$p) {
                 echo $p;
                 $_SESSION['nameOfTicker'] = $p;
-                $_SESSION['nameOfTicker'] = ltrim($p, "<td style='width: 150px; border: 2px solid black; font-weight: bold;'>");
+                $_SESSION['nameOfTicker'] = ltrim($p, "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:20px;'>");
                 $_SESSION['nameOfTicker'] = str_replace("</td>","",$_SESSION['nameOfTicker']);
             }
         

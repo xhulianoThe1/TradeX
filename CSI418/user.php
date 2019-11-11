@@ -8,19 +8,11 @@ if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
     header('location: index.php');
     exit;
 }
-/*
+
 if(isset($_GET['uname'])){    
     $uname = $_GET['uname'];
-        session_start();
     $_SESSION['uname'] = $uname;
 }  
-*/
-else{
-   // session_start();
-   
-    $uname = $_SESSION['uname'] ;
-}
-
 
 ?>   
 
@@ -35,10 +27,31 @@ else{
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 50%;
+}
+
+input[type=submit] {
+  background-color: lightblue;
+  color: #fff;
+  cursor: pointer;
+}
+      
+    </style>
     <script>
     window.onload = function() {
   inactivityTime(); 
 }
+    
     </script>    
 
 </head>
@@ -46,7 +59,7 @@ else{
     
     
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
-  <a class="navbar-brand" href="#">Trade X - <?php echo $uname ?></a>
+  <a class="navbar-brand" href="#">Trade X - <?php echo $_SESSION['uname'] ?></a>
    <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -130,13 +143,13 @@ class TableRowsZ extends RecursiveIteratorIterator {
     }
 
     function beginChildren() {
-        echo "<tr>";
+        echo "<tr style='  background-color: #4CAF50; color: white;'>";
     }
 
     function endChildren() {
         echo "</tr>" . "\n";
-                echo '<td> <form action="getPortfolioName.php" method="post"><br><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></form>  ';
-                echo ' <form action="deletePortfolio.php" method="post"><br><input type="submit" name= "'.$_SESSION['$currentId'].'"value="Delete ' .$_SESSION['nameOfPortfolio'].' from Portfolios"></form> </td>';
+                echo '<td style="width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;"> <form action="getPortfolioName.php" method="post"><span><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></span></form>  ';
+                echo '<form action="deletePortfolio.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['$currentId'].'"value="Delete ' .$_SESSION['nameOfPortfolio'].' from Portfolios"></form></span </td>';
     }
 }
       class TableRows extends RecursiveIteratorIterator {
@@ -158,10 +171,6 @@ class TableRowsZ extends RecursiveIteratorIterator {
     }
 }
 
-//    $stmt = $connection->prepare("SELECT portfolio_name, ticker
-//FROM portfolios, stocks
-//WHERE portfolios.user_id =:user_id");
-      
       
       
 
