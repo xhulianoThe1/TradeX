@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>TradeX</title>
+<title>Trade X</title>
 <link rel="stylesheet" href="login.css">
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,6 +44,7 @@
          <button type="submit" name="submit" class="btn btn-primary" id="submit-credentials">Login</button>
          <br>
          <br>
+        </form>
         </div>
         
         
@@ -71,7 +72,7 @@ span.onclick = function() {
 
     
     <!-- Create user php script -->
-<!--
+
    <?php
     session_start();
     
@@ -139,7 +140,7 @@ if (isset($_POST['create'])) {
   }
 }
 ?>
--->
+
 
 <!-------------------------------------------------------------------------> 
 
