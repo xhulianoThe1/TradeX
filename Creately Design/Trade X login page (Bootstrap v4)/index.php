@@ -22,13 +22,13 @@
 <p id="logo">Trade X</p>
   <!-- The sign in Modal -->
   <div class="modal" id="myModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
       
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Sign in</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <span class="close" style="color: #ffffff">&times;</span>
         </div>
         
         <!-- Modal body -->
@@ -71,6 +71,7 @@ span.onclick = function() {
 
     
     <!-- Create user php script -->
+<!--
    <?php
     session_start();
     
@@ -138,19 +139,19 @@ if (isset($_POST['create'])) {
   }
 }
 ?>
-
+-->
 
 <!-------------------------------------------------------------------------> 
 
 <!-- The sign up Modal -->
 
-  <div class="modal2" id="myModal2"  >
-    <div class="modal2-dialog modal-sm">
-      <div class="modal2-content">
+  <div class="modal" id="myModal2"  >
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
     <!--modal header -->
     <div class="modal-header">
-    <h4 class="modal2-title">Sign up</h4>
-   <span class="close2">&times;</span>
+    <h4 class="modal-title">Sign up</h4>
+    <span class="close2">&times;</span>
     </div>
     <!--modal body -->
 <div class="modal-body">
@@ -171,15 +172,12 @@ if (isset($_POST['create'])) {
     <label for="rpsw"><b></b></label>
     <input type="password" placeholder="Re-enter Password!" name="rpsw" required>
     <br>
-    <button type="submit" name= "create" value= "Submit">Sign up</button>
+    <button type="submit" name= "create" class="btn btn-primary" value= "Submit">Sign up</button>
     <br>
   </div>
   </form>
 </div>    
-         
-          
-        
-      
+
     </div>
   </div>
       </div>

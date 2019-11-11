@@ -30,7 +30,7 @@ body{
     cursor: pointer;
     padding: 0px;
 }
-/*---------------------------------------------------------- */ 
+/*-------------------------Sign in modal--------------------------------- */ 
 
 /* The Modal (background) */
 .modal {
@@ -71,7 +71,7 @@ body{
 
 /* The Close Button */
 .close {
-  color: white;
+  
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -100,10 +100,10 @@ body{
 /* Sign up modal */ 
 /* The Modal (background) */
 .modal2 {
-  position:fixed;
-  display:none;
+  display: none;
+  position: fixed; 
   z-index: 50; 
-  padding-top: 50px;
+  padding-top: 50px; 
   left: 0;
   top: 0;
   overflow: auto;
@@ -116,13 +116,14 @@ body{
   background-color: #fefefe;
   margin: auto;
   padding: 0;
-  border: 1px solid #888;
- 
+  border: 1px solid black;
+  width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
-  animation-duration: 0.4s
+  animation-duration: 0.4s;
+  
 }
 
 /* Animation */
