@@ -30,7 +30,7 @@
           <h4 class="modal-title">Sign in</h4>
          <span class="close" style="color: #ffffff">&times;</span>
         </div>
-        
+        <!-- ../../csi418/ directory for testing michael's gui changes-->
         <!-- Modal body -->
         <div class="modal-body">
          <form action="validate.php" method="post">
@@ -44,9 +44,9 @@
          <button type="submit" name="submit" class="btn btn-primary" id="submit-credentials">Login</button>
          <br>
          <br>
-        </form>
-        </div>
         
+        </div>
+            </form>
         
         
       </div>
