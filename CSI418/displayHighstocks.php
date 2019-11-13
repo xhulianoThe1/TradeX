@@ -2,6 +2,7 @@
 session_start();
 $_SESSION['timestamp'] = time();
 $_SESSION['inactive'] = false;
+$_SESSION['graphCameFrom'] = 'displayHighstocks.php';
 
 //checks to see if the user is actually logged in
 if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
@@ -69,6 +70,30 @@ else{
       <!--Sign-out link-->  
       <li class="nav-item">
         <a class="nav-link" href="logout.php">Sign-out</a>
+      </li>
+    </ul>
+    <!--End of Navbar links -->
+  </div>  
+</nav>
+    
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+   <!--End ofn Toggler/collapsibe Button -->  
+    
+    <!-- Navbar links -->
+    <ul class="navbar-nav">
+      <!-- landing Page link -->
+      <li class="nav-item">
+        <a class="nav-link" href="displayHighstocks.php">Line Chart</a>
+      </li>
+      <!-- Portfolio Viewer Page link -->
+      <li class="nav-item">
+        <a class="nav-link" href="HighchartsPie.php">Pie Chart</a>
+      </li>
+      <!-- User Manual link -->
+      <li class="nav-item">
+        <a class="nav-link" href="HighchartsBarChart.php">Bar Chart</a>
       </li>
     </ul>
     <!--End of Navbar links -->
@@ -161,6 +186,9 @@ function createChart() {
     rangeSelector: {
       selected: 4
     },
+      	title: {
+		text: "Line Chart for " + "<?php echo $_SESSION['nameOfPortfolio'] ?>"
+	},
     yAxis: {
       labels: {
         formatter: function() {

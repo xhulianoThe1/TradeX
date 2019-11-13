@@ -1,22 +1,4 @@
-<?php
-session_start();
-$_SESSION['timestamp'] = time();
-$_SESSION['inactive'] = false;
-
-//checks to see if the user is actually logged in
-if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
-    header('location: index.php');
-    exit;
-}
-
-else{
-   // session_start();
-   
-    $uname = $_SESSION['uname'] ;
-}
-
-
-?>   
+ 
 
 <!DOCTYPE html>
 <html>
@@ -107,32 +89,7 @@ else{
 
     <!--Content Div's-->
     
- <script>
-    //  https://stackoverflow.com/questions/667555/how-to-detect-idle-time-in-javascript-elegantly?page=1&tab=votes#tab-top
-    var inactivityTime = function () {
-    var time;
-    window.onload = resetTimer;
-    // DOM Events
-    document.onmousemove = resetTimer;
-    document.onkeypress = resetTimer;
-    document.onmousedown = resetTimer; // touchscreen presses
-    document.ontouchstart = resetTimer;
-    document.onclick = resetTimer;     // touchpad clicks
-    document.onkeypress = resetTimer;
 
-        //this is a separate logout page for users who are automatically logged out
-    function logout() {
-        location.href = 'inactiveLogout.php';
-        
-    }
-
-    function resetTimer() {
-        clearTimeout(time);
-        time = setTimeout(logout, 900000)
-        // 1000 milliseconds = 1 second, so 900000 is 15 minutes
-    }
-};
-   </script> 
         
        
   <div id="container" style="width:100%; height:400px;"></div>  

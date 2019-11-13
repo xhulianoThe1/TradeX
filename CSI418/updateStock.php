@@ -41,7 +41,7 @@ try {
 ];
     
     $stmt->execute($data2);
-    header("Location: displayHighstocks.php");
+    header("Location: ".$_SESSION['graphCameFrom']);
     exit;
 }
 catch(PDOException $e)

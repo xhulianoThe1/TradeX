@@ -22,7 +22,7 @@ try {
 ];
     
     $stmt->execute($data);
-   header("Location: displayHighstocks.php");
+   header("Location: ".$_SESSION['graphCameFrom']);
    exit;
 }
 catch(PDOException $e)
