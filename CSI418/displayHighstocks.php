@@ -89,7 +89,7 @@ else{
       </li>
       <!-- Portfolio Viewer Page link -->
       <li class="nav-item">
-        <a class="nav-link" href="HighchartsPie.php">Pie Chart</a>
+        <a class="nav-link" href="HighchartsPieChart.php">Pie Chart</a>
       </li>
       <!-- User Manual link -->
       <li class="nav-item">
