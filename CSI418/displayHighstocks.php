@@ -95,6 +95,9 @@ else{
       <li class="nav-item">
         <a class="nav-link" href="HighchartsBarChart.php">Bar Chart</a>
       </li>
+                      <li class="nav-item">
+        <a class="nav-link" href="HighchartsHighLow.php">HighLow Chart</a>
+      </li>
     </ul>
     <!--End of Navbar links -->
   </div>  

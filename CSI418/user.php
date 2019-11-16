@@ -2,6 +2,7 @@
 session_start();
 $_SESSION['timestamp'] = time();
 $_SESSION['inactive'] = false;
+$_SESSION['chosenTicker'] = '';
 
 //checks to see if the user is actually logged in
 if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
@@ -79,7 +80,7 @@ input[type=submit] {
       </li>
       <!-- Settings link-->
       <li class="nav-item">
-        <a class="nav-link" href="#">Settings</a>
+        <a class="nav-link" href="settings.php">Settings</a>
       </li>
       <!--Sign-out link-->  
       <li class="nav-item">
