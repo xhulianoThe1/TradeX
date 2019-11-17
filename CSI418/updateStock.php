@@ -28,10 +28,7 @@ $tickerToAdd = changeTicker($fullName);
 
 try {
     $connection = new PDO($dsn, $username, $password, $options);
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $getPortfolioId = $connection->prepare("SELECT portfolio_id FROM portfolios WHERE portfolios.user_id =:user_id");
-    
-    
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
     $sql = "INSERT INTO stocks (ticker,portfolio_id) VALUES (:ticker,:currentPortId)";
     $stmt = $connection->prepare($sql);
     

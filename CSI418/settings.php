@@ -1,7 +1,13 @@
 <?php
+    require "config.php";
+    require "common.php";
 session_start();
 $_SESSION['timestamp'] = time();
 $_SESSION['inactive'] = false;
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+
 
 //checks to see if the user is actually logged in
 if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
@@ -13,27 +19,26 @@ if(isset($_GET['uname'])){
     $uname = $_GET['uname'];
     $_SESSION['uname'] = $uname;
 }  
+
+if(isset($_SESSION['pswMessage'])){
+    if($_SESSION['pswMessage'] != ''){
+        phpAlert($_SESSION['pswMessage']);
+        $_SESSION['pswMessage'] = '';
+    }
+}
 try {
     $connection = new PDO($dsn, $username, $password, $options);
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $getPortfolioId = $connection->prepare("SELECT portfolio_id FROM portfolios WHERE portfolios.user_id =:user_id");
-    
-    
-    $sql = "INSERT INTO stocks (ticker,portfolio_id) VALUES (:ticker,:currentPortId)";
-    $stmt = $connection->prepare($sql);
-    
-    $data2 = [
-    'ticker' => $tickerToAdd,
-    'currentPortId' => $_SESSION['currentPortId'],
-];
-    
-    $stmt->execute($data2);
-    header("Location: ".$_SESSION['graphCameFrom']);
-    exit;
+    $getPassword = $connection->prepare("SELECT password FROM user WHERE user_id =:user_id");
+
+    $getPassword->execute(['user_id'=>$_SESSION['user_id']]);
+    $retrievedPassword = $getPassword->fetch();
+    $password = implode(array_unique(array_values($retrievedPassword)));
+
 }
 catch(PDOException $e)
     {
-    echo $sql . "<br>" . $e->getMessage();
+    echo "error <br>" . $e->getMessage();
     }
 
 ?>   
@@ -125,12 +130,12 @@ input[type=submit] {
   </button>
        <div class="collapse" id="changepass">
        <div class="changePassword">
-<form name="createNewPassword" method="post" onSubmit="return validatePassword()">
+<form name="createNewPassword" method="post" action="changePassword.php">
 <div style="width:500px;">
 <table border="0" cellpadding="10" cellspacing="0" width="500" align="center" class="tblSaveForm">
 <tr>
 <td width="40%"><label>Current Password</label></td>
-<td width="60%"><input type="password" name="currentPassword" class="txtField"/><span id="currentPassword"  class="required"></span></td>
+<td width="60%"><input type="password" name="currentPassword" class="txtField" id = "currentPass"/><span id="currentPassword"  class="required"></span></td>
 </tr>
 <tr>
 <td><label>New Password</label></td>
@@ -149,7 +154,6 @@ input[type=submit] {
     </div>
        <!--End of Change Password Contents -->
   </div>
-
 
 
     
@@ -174,7 +178,7 @@ input[type=submit] {
 
     function resetTimer() {
         clearTimeout(time);
-        time = setTimeout(logout, 30000)
+        time = setTimeout(logout, 900000)
         // 1000 milliseconds = 1 second, so 900000 is 15 minutes
         //settings page will have 30000 for the demo (loggout after 30secs)
     }
