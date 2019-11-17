@@ -66,6 +66,7 @@ try{
         $indicator = False;
     }
     if( $indicator == False){
+        $_SESSION['pswMessage'] = "You have entered incorrect login credentials. Please try again with the correct login!";
         header("Location: index.php");
     
     exit;

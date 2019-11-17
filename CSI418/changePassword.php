@@ -53,5 +53,4 @@ if(isset($_POST['currentPassword'])){
 
          header("Location: settings.php");
          exit;  
-//gregGREG1!
 ?>   

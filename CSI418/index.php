@@ -85,6 +85,13 @@ span.onclick = function() {
         }
     }
     
+    if(isset($_SESSION['pswMessage'])){
+    if($_SESSION['pswMessage'] != ''){
+        phpAlert($_SESSION['pswMessage']);
+        $_SESSION['pswMessage'] = '';
+    }
+}
+    
 function phpAlert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
