@@ -9,18 +9,19 @@ if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
     header('location: index.php');
     exit;
 }
-/*
-if(isset($_GET['uname'])){    
-    $uname = $_GET['uname'];
-        session_start();
-    $_SESSION['uname'] = $uname;
-}  
-*/
-else{
-   // session_start();
-   
-    $uname = $_SESSION['uname'] ;
-}  
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+
+
+if(isset($_SESSION['tickerReport'])){
+    if($_SESSION['tickerReport'] != ''){
+        phpAlert($_SESSION['tickerReport']);
+        $_SESSION['tickerReport'] = '';
+    }
+    
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -45,7 +46,7 @@ else{
     
     
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
-  <a class="navbar-brand" href="#">Trade X - <?php echo $uname ?></a>
+  <a class="navbar-brand" href="#">Trade X - <?php echo $_SESSION['uname'] ?></a>
    <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>

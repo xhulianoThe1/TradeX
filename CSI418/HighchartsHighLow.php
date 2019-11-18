@@ -9,18 +9,19 @@ if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
     header('location: index.php');
     exit;
 }
-/*
-if(isset($_GET['uname'])){    
-    $uname = $_GET['uname'];
-        session_start();
-    $_SESSION['uname'] = $uname;
-}  
-*/
-else{
-   // session_start();
-   
-    $uname = $_SESSION['uname'] ;
-}  
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+
+
+if(isset($_SESSION['tickerReport'])){
+    if($_SESSION['tickerReport'] != ''){
+        phpAlert($_SESSION['tickerReport']);
+        $_SESSION['tickerReport'] = '';
+    }
+    
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -45,7 +46,7 @@ else{
     
     
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
-  <a class="navbar-brand" href="#">Trade X - <?php echo $uname ?></a>
+  <a class="navbar-brand" href="#">Trade X - <?php echo $_SESSION['uname'] ?></a>
    <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -3688,7 +3689,7 @@ echo "<table style='border: solid 1px black;'>";
     function endChildren() {
         echo "</tr>" . "\n";
         echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="chooseStock.php" method="post"><input type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to display ' .$_SESSION['nameOfTicker'].' from Portfolio"></form>';
-        echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
+        echo '<form action="removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form>';
 
     }
 }
