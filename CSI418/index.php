@@ -402,7 +402,7 @@ span2.onclick = function() {
   <script src="https://www.clarium.com/themes/clarium-intranet/assets/scripts/plugins.js?1570399193"></script>
   <script src="https://www.clarium.com/themes/clarium-intranet/assets/scripts/global.js?1570399193"></script>
   <!-----------------------------------End of Background-------------------------------------------------------------------->
-      <p id="help"><u>Need Help?</u></p>
+      <p id="help"><a href="UserManualNotLogged.php"><u>Need Help?</u></a></p>
       </div>
   </body>
   </html> 
