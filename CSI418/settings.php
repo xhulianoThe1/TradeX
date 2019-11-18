@@ -213,7 +213,7 @@ input[type=submit] {
 
     function resetTimer() {
         clearTimeout(time);
-        time = setTimeout(logout, 900000)
+        time = setTimeout(logout, 30000)
         // 1000 milliseconds = 1 second, so 900000 is 15 minutes
         //settings page will have 30000 for the demo (loggout after 30secs)
     }
