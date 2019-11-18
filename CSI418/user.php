@@ -3,6 +3,7 @@ session_start();
 $_SESSION['timestamp'] = time();
 $_SESSION['inactive'] = false;
 $_SESSION['chosenTicker'] = '';
+$_SESSION['period'] = 7;
 
 //checks to see if the user is actually logged in
 if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){

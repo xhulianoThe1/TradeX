@@ -66,7 +66,7 @@ if(isset($_SESSION['tickerReport'])){
       </li>
       <!-- Settings link-->
       <li class="nav-item">
-        <a class="nav-link" href="#">Settings</a>
+        <a class="nav-link" href="settings.php">Settings</a>
       </li>
       <!--Sign-out link-->  
       <li class="nav-item">
@@ -99,6 +99,9 @@ if(isset($_SESSION['tickerReport'])){
       </li>
                       <li class="nav-item">
         <a class="nav-link" href="HighchartsHighLow.php">HighLow Chart</a>
+      </li>
+                                      <li class="nav-item">
+        <a class="nav-link" href="SMA.php">Simple Moving Average Analytic</a>
       </li>
     </ul>
     <!--End of Navbar links -->
