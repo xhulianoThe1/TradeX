@@ -40,7 +40,7 @@
                </li>
                <!-- Settings link-->
                <li class="nav-item">
-                  <a class="nav-link" href="#">Settings</a>
+                  <a class="nav-link" href="settings.php">Settings</a>
                </li>
                <!--Sign-out link-->  
                <li class="nav-item">
