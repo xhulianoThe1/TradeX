@@ -10,17 +10,15 @@ foreach ($_POST as $name => $val)
 }
 $_SESSION['nameOfPortfolio'] = str_replace("_"," ",$_SESSION['nameOfPortfolio']);
     try {
-      
-        /* This try block connects to the database and builds the SQL statement.
-         * It accesses the required information, and then inserts it into the user table using an
-         * insert command.
-        */
-
         $connection = new PDO($dsn, $username, $password, $options);
         //CURRENTLY THIS SHOULD BREAK IF TWO PORTFOLIOS SHARE THE SAME NAME IN THE DATABASE
-        $selectPortId = $connection->prepare("SELECT portfolio_id FROM portfolios WHERE portfolio_name =:portfolio_name LIMIT 1");
+        $selectPortId = $connection->prepare("SELECT portfolio_id FROM portfolios WHERE portfolio_name =:portfolio_name AND user_id=:user_id LIMIT 1");
     
-        $selectPortId->execute(['portfolio_name'=>$_SESSION['nameOfPortfolio']]);
+                 $data = [
+    'portfolio_name' => $_SESSION['nameOfPortfolio'],
+    'user_id' => $_SESSION['user_id'],
+];
+        $selectPortId->execute($data);
 
         $arr = $selectPortId->fetch();
         $_SESSION['currentPortId'] = $arr[0];

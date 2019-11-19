@@ -5,6 +5,11 @@ $_SESSION['inactive'] = false;
 $_SESSION['chosenTicker'] = '';
 $_SESSION['period'] = 7;
 
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+
+
 //checks to see if the user is actually logged in
 if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
     header('location: index.php');
@@ -16,6 +21,13 @@ if(isset($_GET['uname'])){
     $_SESSION['uname'] = $uname;
 }  
 
+if(isset($_SESSION['portExists'])){
+    if($_SESSION['portExists'] != ''){
+        phpAlert($_SESSION['portExists']);
+        $_SESSION['portExists'] = '';
+    }
+
+}
 ?>   
 
 <!DOCTYPE html>
@@ -95,7 +107,7 @@ input[type=submit] {
     <!--Content Div's-->
     <h2><b> Create New Portfolio:</b></h2>
     <form action="createPortfolio.php" method="post">
-<strong>Enter portfolio name here: </strong><input type="text" name="portfolioName" placeholder="'Portfolio Name'" autocomplete="off"><br>
+<strong>Enter portfolio name here: </strong><input type="text" name="portfolioName" placeholder="'Portfolio Name'" autocomplete="off" required="true"><br>
 <input type="submit">
 </form>
     <br>

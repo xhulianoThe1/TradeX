@@ -380,7 +380,7 @@ input[type=submit] {
 <body>
 <h1><b> <?php echo $_SESSION['nameOfPortfolio'] ?></b></h1>
 
-<h2>Search for a stock here:</h2>
+<h5>Search for an asset here [type the name and select from the dropdown, or type the ticker surrounded by '()' ]:</h5>
 
     
     
