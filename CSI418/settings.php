@@ -1,6 +1,6 @@
 <?php
-    require "config.php";
-    require "common.php";
+    require "Data Initialization/config.php";
+    require "Data Initialization/common.php";
 session_start();
 $_SESSION['timestamp'] = time();
 $_SESSION['inactive'] = false;
@@ -106,11 +106,11 @@ input[type=submit] {
       </li>
       <!-- Settings link-->
       <li class="nav-item">
-        <a class="nav-link" href="#">Settings</a>
+        <a class="nav-link" href="settings.php">Settings</a>
       </li>
       <!--Sign-out link-->  
       <li class="nav-item">
-        <a class="nav-link" href="logout.php">Sign-out</a>
+        <a class="nav-link" href="Helper Files/logout.php">Sign-out</a>
       </li>
     </ul>
     <!--End of Navbar links -->
@@ -130,7 +130,7 @@ input[type=submit] {
   </button>
        <div class="collapse" id="changepass">
        <div class="changePassword">
-<form name="createNewPassword" method="post" action="changePassword.php">
+<form name="createNewPassword" method="post" action="Create and Update/changePassword.php">
 <div style="width:500px;">
 <table border="0" cellpadding="10" cellspacing="0" width="500" align="center" class="tblSaveForm">
 <tr>
@@ -163,7 +163,7 @@ input[type=submit] {
   </button>
        <div class="collapse" id="delete">
        <div class="deleteAccount">
-<form name="deleteInfo" method="post" action="deleteAccount.php">
+<form name="deleteInfo" method="post" action="Delete/deleteAccount.php">
 <div style="width:500px;">
 <table border="0" cellpadding="10" cellspacing="0" width="500" align="center" class="tblSaveForm">
 <tr>
@@ -207,13 +207,13 @@ input[type=submit] {
 
         //this is a separate logout page for users who are automatically logged out
     function logout() {
-        location.href = 'inactiveLogout.php';
+        location.href = 'Helper Files/inactiveLogout.php';
         
     }
 
     function resetTimer() {
         clearTimeout(time);
-        time = setTimeout(logout, 30000)
+        time = setTimeout(logout, 900000)
         // 1000 milliseconds = 1 second, so 900000 is 15 minutes
         //settings page will have 30000 for the demo (loggout after 30secs)
     }

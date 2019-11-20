@@ -97,7 +97,7 @@ input[type=submit] {
       </li>
       <!--Sign-out link-->  
       <li class="nav-item">
-        <a class="nav-link" href="logout.php">Sign-out</a>
+        <a class="nav-link" href="Helper Files/logout.php">Sign-out</a>
       </li>
     </ul>
     <!--End of Navbar links -->
@@ -106,7 +106,7 @@ input[type=submit] {
 
     <!--Content Div's-->
     <h2><b> Create New Portfolio:</b></h2>
-    <form action="createPortfolio.php" method="post">
+    <form action="Create and Update/createPortfolio.php" method="post">
 <strong>Enter portfolio name here: </strong><input type="text" name="portfolioName" placeholder="'Portfolio Name'" autocomplete="off" required="true"><br>
 <input type="submit">
 </form>
@@ -128,7 +128,7 @@ input[type=submit] {
 
         //this is a separate logout page for users who are automatically logged out
     function logout() {
-        location.href = 'inactiveLogout.php';
+        location.href = 'Helper Files/inactiveLogout.php';
         
     }
 
@@ -142,8 +142,8 @@ input[type=submit] {
     
   <?php
     $_SESSION['nameOfPortfolio'] ='';
-    require "config.php";
-    require "common.php";
+    require "Data Initialization/config.php";
+    require "Data Initialization/common.php";
 echo "<table style='border: solid 1px black;'>";
  echo "<h2><b>Portfolios<b><h2></tr>";
 
@@ -162,8 +162,8 @@ class TableRowsZ extends RecursiveIteratorIterator {
 
     function endChildren() {
         echo "</tr>" . "\n";
-                echo '<td style="width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;"> <form action="getPortfolioName.php" method="post"><span><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></span></form>  ';
-                echo '<form action="deletePortfolio.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['$currentId'].'"value="Delete ' .$_SESSION['nameOfPortfolio'].' from Portfolios"></form></span </td>';
+                echo '<td style="width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;"> <form action="Helper Files/getPortfolioName.php" method="post"><span><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></span></form>  ';
+                echo '<form action="Delete/deletePortfolio.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['$currentId'].'"value="Delete ' .$_SESSION['nameOfPortfolio'].' from Portfolios"></form></span </td>';
     }
 }
       class TableRows extends RecursiveIteratorIterator {

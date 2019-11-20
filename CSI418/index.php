@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <title>Trade X</title>
-<link rel="stylesheet" href="login.css">
+<link rel="stylesheet" href="templates/login.css">
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -33,7 +33,7 @@
         <!-- ../../csi418/ directory for testing michael's gui changes-->
         <!-- Modal body -->
         <div class="modal-body">
-         <form action="validate.php" method="post">
+         <form action="Helper Files/validate.php" method="post">
          <div class="container">
          <label for="uname"><b></b></label>
          <input type="text" placeholder="Enter Username!" name="uname" required>
@@ -96,8 +96,8 @@ function phpAlert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 if (isset($_POST['create'])) { 
-    require "config.php";
-    require "common.php";
+    require "Data Initialization/config.php";
+    require "Data Initialization/common.php";
     try {
       
         /* This try block connects to the database and builds the SQL statement.
