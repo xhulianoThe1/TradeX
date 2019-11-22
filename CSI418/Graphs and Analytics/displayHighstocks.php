@@ -323,8 +323,13 @@ input[type=submit] {
 <body>
 <h1><b> <?php echo $_SESSION['nameOfPortfolio'] ?></b></h1>
 
-<h5>Search for an asset here [type the name and select from the dropdown, or type the ticker surrounded by '()' ]:</h5>
 
+
+
+<?php
+if($_SESSION['deleteMode']){
+    ?>    
+    <h5>Search for an asset here [type the name and select from the dropdown, or type the ticker surrounded by '()' ]:</h5>
 <!--Make sure the form has the autocomplete function switched off:-->
 <form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
   <div class="autocomplete" style="width:300px;">
@@ -433,6 +438,7 @@ function autocomplete(inp, arr) {
       closeAllLists(e.target);
   });
 }
+    
 
 /*An array containing all companies with tickers from quandl*/
     /*Next step is to restrict entering a value via submit to only those that appear in this array. (and editing code so that it doesnt say countries anymore) */
@@ -3625,9 +3631,11 @@ var tickers = ["Apple Inc (AAPL) ",
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the tickers array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), tickers);
-</script>
+</script>    
     
    <?php
+}
+    
 echo "<table style='border: solid 1px black;'>";
  echo "<h2><b>Stocks in Current Portfolio:<b><h2></tr>";
 
