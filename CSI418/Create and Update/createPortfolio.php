@@ -27,9 +27,14 @@ FROM portfolios WHERE portfolio_name =:name AND user_id=:id)");
                 exit;
         }
 
+                $data = [
+            'name' => $_POST['portfolioName'],
+            'id' => $_SESSION['user_id'],
+            'visibility' => $_POST['visibility']
+        ];
         
         
-    $createPortfolio = $connection->prepare("INSERT INTO portfolios (portfolio_name, user_id) VALUES (:name,:id)");
+    $createPortfolio = $connection->prepare("INSERT INTO portfolios (portfolio_name, user_id, visibility) VALUES (:name,:id,:visibility)");
     $createPortfolio->execute($data);
     header("Location: ../user.php");
     exit;

@@ -4,6 +4,7 @@ $_SESSION['timestamp'] = time();
 $_SESSION['inactive'] = false;
 $_SESSION['chosenTicker'] = '';
 $_SESSION['period'] = 7;
+$_SESSION['publicPortUser'] = '';
 
 function phpAlert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
@@ -108,6 +109,9 @@ input[type=submit] {
     <h2><b> Create New Portfolio:</b></h2>
     <form action="Create and Update/createPortfolio.php" method="post">
 <strong>Enter portfolio name here: </strong><input type="text" name="portfolioName" placeholder="'Portfolio Name'" autocomplete="off" required="true"><br>
+<b>Portfolio Visibility: </b> <br> Private <input type ="radio" name ="visibility" value="0" checked> 
+       <br> Public <input type ="radio" name ="visibility" value="1">
+        <br>
 <input type="submit">
 </form>
     <br>
@@ -145,7 +149,7 @@ input[type=submit] {
     require "Data Initialization/config.php";
     require "Data Initialization/common.php";
 echo "<table style='border: solid 1px black;'>";
- echo "<h2><b>Portfolios<b><h2></tr>";
+ echo "<h2><b>Your Portfolios</b><h2></tr>";
 
 class TableRowsZ extends RecursiveIteratorIterator {
     function __construct($it) {
@@ -166,6 +170,26 @@ class TableRowsZ extends RecursiveIteratorIterator {
                 echo '<form action="Delete/deletePortfolio.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['$currentId'].'"value="Delete ' .$_SESSION['nameOfPortfolio'].' from Portfolios"></form></span </td>';
     }
 }
+ class TableRowsPublic extends RecursiveIteratorIterator {
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
+
+    function current() {
+        return "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;'>" . parent::current(). "</td>";
+    }
+
+    function beginChildren() {
+        echo "<tr style='  background-color: #4CAF50; color: white;'>";
+    }
+
+    function endChildren() {
+        echo "</tr>" . "\n";
+                echo '<td style="width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;"> <form action="Helper Files/getPortfolioName.php" method="post"><span><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></span> <input type ="hidden" name="'.$_SESSION['publicPortUser'].'"></form></td>  ';
+    }
+}     
+      
+      
       class TableRows extends RecursiveIteratorIterator {
     function __construct($it) {
         parent::__construct($it, self::LEAVES_ONLY);
@@ -206,8 +230,8 @@ try {
         
     $printPortfolioNames = $connection->prepare("SELECT portfolio_name FROM portfolios WHERE portfolios.user_id =:user_id");
     $printPortfolioNames->execute(['user_id'=>$_SESSION["user_id"]]);
-            $printPortfolioNames = $printPortfolioNames->fetchAll();
-        $counter = 0;
+    $printPortfolioNames = $printPortfolioNames->fetchAll();
+    $counter = 0;
   // echo array_unique($getPortfolioId[$counter]);
     
     foreach(new TableRowsZ(new RecursiveArrayIterator($portfolioNames->fetchAll())) as $k=>$v) {
@@ -228,6 +252,57 @@ try {
             }
         
     }
+
+    //same code but now for public portfolios
+    echo "</table><br>";
+    echo "<table style='border: solid 1px black;'>";
+    echo "<h2><b>Public Portfolios</b> </tr>";
+    
+        $portfolioNames = $connection->prepare("SELECT portfolio_name FROM portfolios WHERE visibility = 1 AND portfolios.user_id <>:user_id");
+    $portfolioNames->execute(['user_id'=>$_SESSION["user_id"]]);
+        // set the resulting array to associative
+    $result = $portfolioNames->setFetchMode(PDO::FETCH_ASSOC);
+    
+    
+        $getPortfolioId = $connection->prepare("SELECT portfolio_id FROM portfolios WHERE visibility = 1 AND portfolios.user_id <>:user_id");
+        $getPortfolioId->execute(['user_id'=>$_SESSION["user_id"]]);
+        //$portfolio_id = $getPortfolioId->setFetchMode(PDO::FETCH_ASSOC);
+        $getPortfolioId = $getPortfolioId->fetchAll();
+    
+    
+    
+    $printPortfolioNames = $connection->prepare("SELECT portfolio_name FROM portfolios WHERE visibility = 1 AND portfolios.user_id <>:user_id");
+    $printPortfolioNames->execute(['user_id'=>$_SESSION["user_id"]]);
+    $printPortfolioNames = $printPortfolioNames->fetchAll();
+    $counter = 0;
+        foreach(new TableRowsPublic(new RecursiveArrayIterator($portfolioNames->fetchAll())) as $k=>$v) {
+        echo $v;
+       // $_SESSION['nameOfPortfolio'] = ltrim($v, "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;'>");
+       // $_SESSION['nameOfPortfolio'] = str_replace("</td>","",$_SESSION['nameOfPortfolio']);
+         $_SESSION['nameOfPortfolio'] = implode("",array_unique($printPortfolioNames[$counter]));
+        
+        $_SESSION['$currentId'] = $getPortfolioId[$counter][0];
+        $counter = $counter + 1;
+        $retrieveTickers = $connection->prepare("SELECT ticker FROM stocks WHERE portfolio_id=:pid");
+        $retrieveTickers->execute(['pid'=>$_SESSION['$currentId']]);
+            
+            
+                    $getUserId = $connection->prepare("SELECT user_id FROM portfolios WHERE portfolio_id=:pid");
+        $getUserId->execute(['pid'=>$_SESSION['$currentId']]);
+        //$portfolio_id = $getPortfolioId->setFetchMode(PDO::FETCH_ASSOC);
+        $getUserId = $getUserId->fetch();
+        $_SESSION['publicPortUser'] = $getUserId[0];
+            
+            
+
+        $result2 = $retrieveTickers->setFetchMode(PDO::FETCH_ASSOC);
+
+            foreach(new TableRows(new RecursiveArrayIterator($retrieveTickers->fetchAll())) as $o=>$p) {
+                echo $p;
+            }
+        
+    }
+    
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
