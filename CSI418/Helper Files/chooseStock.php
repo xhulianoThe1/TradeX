@@ -8,7 +8,7 @@ foreach ($_POST as $name => $val)
      $_SESSION['chosenTicker'] =  htmlspecialchars($name);
 }
 
-   header("Location: ../Graphs and Anayltics/".$_SESSION['graphCameFrom']);
+   header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
    exit;
 
 

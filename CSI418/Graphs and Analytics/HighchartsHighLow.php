@@ -72,6 +72,9 @@ if(isset($_SESSION['tickerReport'])){
       <li class="nav-item">
         <a class="nav-link" href="../Helper Files/logout.php">Sign-out</a>
       </li>
+                	  <li class="nav-item">
+        <a class="nav-link" href="MACD.php">Moving Average Convergence/Divergence Analytic</a>
+      </li>
     </ul>
     <!--End of Navbar links -->
   </div>  
