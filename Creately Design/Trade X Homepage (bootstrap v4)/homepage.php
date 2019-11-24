@@ -105,7 +105,9 @@ if(isset($_SESSION['portExists'])){
     <div class="container">    
     <div class="jumbotron" style="background-color:gray;">
     <h4>About Trade X</h4>
-    <p>place holder text</p>
+        <!-- https://www.flickr.com/photos/maguisso/218840988/in/photolist-kkBNu-cr2yJQ-3giWe5-9F1n3C-5C2aid-88qWS-9aeC6-6wYs7z-91djvW-XJAST-dePZQb-Gy1TwB-5t8dCa-frzWBv-4ksTmn-5B6KiY-8Co2Tw-4bnVMd-9Jcdov-bmBZZ9-5FxDfC-kqo5E-f2dVN1-GvDoc9-Gy1RZZ-GeGk6Y-GvDoJS-6mm2Nr-Gy1STT-GvDpuQ-GeGfLW-GvDq2w-HLcpsx-Gy1ThD-GvDpmJ-GDRpAx-GeGjQC-FJtWnn-Gy1S8p-GvDovL-Gy1RN6-FJjcUW-Gy1PB2-GeGma1-HDUuUv-HBwu7A-GBtVTd-GeGmhW-GvDpCL-FJtZ4p -->
+    <img src ="User_Manual_Images/../welcome.jpg" class="img-fluid" height = "200" width = "300">
+    <p>Trade X is a portfolio management application that provides financial data on publicly traded NASDAQ assets from the comfort of your computer or phone. Create a portfolio now to view information on stock prices, graphs, and analytics. Navigate either to the View Portfolios button above to get started, or access the Portfolios tab on our website header at any time to view your portfolio information.</p>
     </div>
     </div>
 
