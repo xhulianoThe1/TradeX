@@ -97,7 +97,7 @@ if(isset($_SESSION['portExists'])){
     <h1 class="display-3" id="logo">Trade X</h1>
     <br>
     <a href="user.php" type="button" id="vp" class="btn btn-secondary btn-lg">View Portfolios</a>
-    <a href="#" type="button" id="so" class="btn btn-secondary btn-lg">Sign Out</a>
+    <a href="logout.php" type="button" id="so" class="btn btn-secondary btn-lg">Sign Out</a>
     <br>
     <br>
     <br>

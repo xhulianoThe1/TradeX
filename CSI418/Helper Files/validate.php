@@ -86,7 +86,7 @@ else{
     $_SESSION['loggedIn'] = true;
     $_SESSION['uname'] = $uname;
     $_SESSION['user_id'] = $getId;
-    header("Location: ../user.php");
+    header("Location: ../homepage.php");
     exit;
 }
 
