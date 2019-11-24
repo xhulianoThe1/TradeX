@@ -79,7 +79,7 @@ if(isset($_SESSION['portExists'])){
       </li>
       <!--Sign-out link-->  
       <li class="nav-item">
-        <a class="nav-link" href="logout.php">Sign-out</a>
+        <a class="nav-link" href="Helper Files/logout.php">Sign-out</a>
       </li>
     </ul>
     <!--End of Navbar links -->
@@ -129,7 +129,7 @@ if(isset($_SESSION['portExists'])){
 
         //this is a separate logout page for users who are automatically logged out
     function logout() {
-        location.href = 'inactiveLogout.php';
+        location.href = 'Helper Files/inactiveLogout.php';
         
     }
 
