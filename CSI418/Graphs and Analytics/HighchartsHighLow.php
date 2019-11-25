@@ -107,6 +107,9 @@ if(isset($_SESSION['tickerReport'])){
                 	  <li class="nav-item">
         <a class="nav-link" href="MACD.php">Moving Average Convergence/Divergence Analytic</a>
       </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="totalLineChart.php">Total Open Line Chart</a>
+      </li>
     </ul>
       
     <!--End of Navbar links -->
