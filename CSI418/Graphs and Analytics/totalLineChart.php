@@ -4,14 +4,11 @@ $_SESSION['timestamp'] = time();
 $_SESSION['inactive'] = false;
 $_SESSION['graphCameFrom'] = 'totalLineChart.php';
 
-
-
 //checks to see if the user is actually logged in
 if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
     header('location: ../index.php');
     exit;
 }
-
 function phpAlert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
@@ -35,7 +32,7 @@ if(isset($_SESSION['tickerReport'])){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-            <link rel="stylesheet" href="../templates/style.css">
+           <link rel="stylesheet" href="../templates/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -101,24 +98,22 @@ if(isset($_SESSION['tickerReport'])){
       <li class="nav-item">
         <a class="nav-link" href="HighchartsBarChart.php">Bar Chart</a>
       </li>
-              <li class="nav-item">
+                      <li class="nav-item">
         <a class="nav-link" href="HighchartsHighLow.php">HighLow Chart</a>
       </li>
-                                      <li class="nav-item">
+                                              <li class="nav-item">
         <a class="nav-link" href="SMA.php">Simple Moving Average Analytic</a>
       </li>
-        	  <li class="nav-item">
+                	  <li class="nav-item">
         <a class="nav-link" href="MACD.php">Moving Average Convergence/Divergence Analytic</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="totalLineChart.php">Total Open Line Chart</a>
       </li>
     </ul>
-      
     <!--End of Navbar links -->
   </div>  
 </nav>
-    
 
 <script>
     //  https://stackoverflow.com/questions/667555/how-to-detect-idle-time-in-javascript-elegantly?page=1&tab=votes#tab-top
@@ -417,9 +412,6 @@ input[type=submit] {
 
 <h5>Search for an asset here [type the name and select from the dropdown, or type the ticker surrounded by '()' ]:</h5>
 
-    
-    
-    
 <!--Make sure the form has the autocomplete function switched off:-->
 <form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
   <div class="autocomplete" style="width:300px;">
@@ -427,7 +419,8 @@ input[type=submit] {
   </div>
   <input type="submit">
 </form>
-    <br>
+    
+
 <script>
     //https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function autocomplete(inp, arr) {
@@ -3741,15 +3734,12 @@ echo "<table style='border: solid 1px black;'>";
 
     function endChildren() {
         echo "</tr>" . "\n";
-        echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="../Helper Files/chooseStock.php" method="post"><input type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to display ' .$_SESSION['nameOfTicker'].' from Portfolio"></form>';
-if($_SESSION['deleteMode'] == true){
-echo '<form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form>';
-
+        if($_SESSION['deleteMode'] == true){
+            echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
         }
         else{
             
         }
-
 
     }
 }
@@ -3785,7 +3775,5 @@ echo "</table>";
     
     
 
-</body>
-</html>
 </body>
 </html>
