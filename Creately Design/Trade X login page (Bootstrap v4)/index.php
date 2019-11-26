@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <title>Trade X</title>
-<link rel="stylesheet" href="templates/login.css">
+<link rel="stylesheet" href="login.css">
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -33,7 +33,7 @@
         <!-- ../../csi418/ directory for testing michael's gui changes-->
         <!-- Modal body -->
         <div class="modal-body">
-         <form action="Helper Files/validate.php" method="post">
+         <form action="validate.php" method="post">
          <div class="container">
          <label for="uname"><b></b></label>
          <input type="text" placeholder="Enter Username!" name="uname" required>
@@ -85,19 +85,12 @@ span.onclick = function() {
         }
     }
     
-    if(isset($_SESSION['pswMessage'])){
-    if($_SESSION['pswMessage'] != ''){
-        phpAlert($_SESSION['pswMessage']);
-        $_SESSION['pswMessage'] = '';
-    }
-}
-    
 function phpAlert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 if (isset($_POST['create'])) { 
-    require "Data Initialization/config.php";
-    require "Data Initialization/common.php";
+    require "config.php";
+    require "common.php";
     try {
       
         /* This try block connects to the database and builds the SQL statement.
@@ -402,7 +395,7 @@ span2.onclick = function() {
   <script src="https://www.clarium.com/themes/clarium-intranet/assets/scripts/plugins.js?1570399193"></script>
   <script src="https://www.clarium.com/themes/clarium-intranet/assets/scripts/global.js?1570399193"></script>
   <!-----------------------------------End of Background-------------------------------------------------------------------->
-      <p id="help"><a href="UserManualNotLogged.php"><u>Need Help?</u></a></p>
+      <p id="help"><u>Need Help?</u></p>
       </div>
   </body>
   </html> 
