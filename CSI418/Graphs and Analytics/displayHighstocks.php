@@ -244,7 +244,7 @@ $.each(names, function(i, name) {
     newData.reverse();
 
     seriesOptions[i] = {
-      name: data.code,
+      name: name,
       data: newData
     };
 
