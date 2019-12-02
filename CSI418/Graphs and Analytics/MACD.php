@@ -156,8 +156,12 @@ if(isset($_SESSION['tickerReport'])){
     require "../Data Initialization/common.php";
     try {  
         $connection = new PDO($dsn, $username, $password, $options);
-        $selectTickers = $connection->prepare("SELECT ticker FROM stocks WHERE portfolio_id =:portfolio_id");
-        $selectTickers->execute(['portfolio_id'=>$_SESSION['currentPortId']]);
+        $selectTickers = $connection->prepare("SELECT ticker FROM stocks WHERE portfolio_id =:portfolio_id AND ticker=:ticker");
+                $data = [
+    'ticker' => $_SESSION['chosenTicker'],
+    'portfolio_id' => $_SESSION['currentPortId'],
+];
+        $selectTickers->execute($data);
         $fetchType = $selectTickers->setFetchMode(PDO::FETCH_NUM);
         
                 $checked = false;
@@ -380,10 +384,7 @@ if($_SESSION['deleteMode']){
   <input type="submit">
 </form>
     <br>
-<form action="../Create and Update/updatePeriod.php" method = "post">
-  <strong>Enter the amount of periods you wish to display the moving average on here (between 1 and 500):</strong> <input type="number" name="period" min="1" max="500", required="true">
-  <input type="submit">
-</form>
+
 <script>
     //https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function autocomplete(inp, arr) {
