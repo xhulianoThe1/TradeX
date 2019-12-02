@@ -276,7 +276,7 @@ $.each(names, function(i, name) {
 	
 
     seriesOptions[i] = {
-		name: data.code,
+		name: name,
 		data: newData2
     };
     // As we're loading the data asynchronously, we don't know what order it will arrive. So
