@@ -255,7 +255,8 @@ function createChart() {
 $.each(names, function(i, name) {
 
   $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date=2015-05-01&column_index=11&auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
-    var newData = [];
+    var newData = []
+		NumberOfStocks = 5;
 
     data.dataset.data.forEach(function(point) {
       newData.push([point[1]]);
@@ -268,7 +269,7 @@ $.each(names, function(i, name) {
 
     values[i] = {
 		name: name,
-		y: Number(newData2)
+		y: Number(newData2)*NumberOfStocks
     };
     // As we're loading the data asynchronously, we don't know what order it will arrive. So
     // we keep a counter and create the chart when all the data is loaded.

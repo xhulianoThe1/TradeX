@@ -246,10 +246,11 @@ function createChart() {
 $.each(names, function(i, name) {
 
   $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date=2015-05-01&column_index=11&auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
-    var newData = [];
+    var newData = []
+		NumberOfStocks = 5;
 
     data.dataset.data.forEach(function(point) {
-      newData.push([new Date(point[0]).getTime(), point[1]]);
+      newData.push([new Date(point[0]).getTime(), Number(point[1])*NumberOfStocks]);
     });
 
     newData.reverse();
