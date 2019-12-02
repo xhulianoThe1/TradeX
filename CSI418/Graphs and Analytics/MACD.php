@@ -238,7 +238,7 @@ function createChart() {
                 x: -3
             },
             title: {
-                text: 'MACD'
+                text: 'pivot-point-ohlc'
             }
         }, {
             top: '75%',
@@ -253,7 +253,7 @@ function createChart() {
             }
         }],
             series: [{
-            type: 'macd',
+            type: 'ohlc',
 			id: names[0],
             data: ohlc,
             name: names[0],
@@ -261,11 +261,22 @@ function createChart() {
                 units: groupingUnits
             }
         },{
-            type: 'macd',
+            type: 'pivotpoints',
             linkedTo: names[0],
-			getSelectedPoints: true,
-            name: "MACD " + names[0] + ", Period: " + <?php echo $_SESSION['period']?>,
-            params: {period:<?php echo $_SESSION['period']?>}
+            zIndex: 0,
+            lineWidth: 1,
+            dataLabels: {
+                overflow: 'none',
+                crop: false,
+                y: 4,
+                style: {
+                    fontSize: 9
+                }
+            }
+        },{
+            type: 'macd',
+			yAxis: 1,
+            linkedTo: names[0]
 		}]
   });
 }
