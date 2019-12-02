@@ -280,7 +280,7 @@ function createChart() {
 
 $.each(names, function(i, name) {
 
-  $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date=2014-05-01&column_index=11&auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
+  $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date=2015-05-01&column_index=11&auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
     var date = [],
 		tot = [],
 		combine = [],
