@@ -166,10 +166,21 @@ if(isset($_SESSION['tickerReport'])){
         $selectTickers->execute(['portfolio_id'=>$_SESSION['currentPortId']]);
         $fetchType = $selectTickers->setFetchMode(PDO::FETCH_NUM);
  
+        $checked = false;
         $condition = true;
         $entry = '';
         while($condition){
             $tickers = $selectTickers->fetch();
+            if(!$checked){
+                if(gettype($tickers) == 'array'){
+                    $checked = true;
+                }
+                else{
+                    $alert = "The portfolio you are trying to graph currently contains no assets. If this portfolio is owned by you, please search for an asset and add it to display portfolio information. If you are viewing a public portfolio, then either the portfolio has no assets or was deleted, please try viewing a different portfolio.";
+                    phpAlert($alert);  
+
+            }
+            }
             if($tickers == ""){
                 $entry = rtrim($entry, ',');
                 $condition = false;

@@ -159,6 +159,8 @@ if(isset($_SESSION['tickerReport'])){
         $selectTickers = $connection->prepare("SELECT ticker FROM stocks WHERE portfolio_id =:portfolio_id");
         $selectTickers->execute(['portfolio_id'=>$_SESSION['currentPortId']]);
         $fetchType = $selectTickers->setFetchMode(PDO::FETCH_NUM);
+        
+                $checked = false;
         $condition = true;
         $entry = '';
         while($condition){
@@ -170,6 +172,36 @@ if(isset($_SESSION['tickerReport'])){
             else{
                 $entry = $entry.'"'.$tickers[0].'",';
             }
+        }
+                
+        if($entry==""){
+        $selectTickers = $connection->prepare("SELECT ticker FROM stocks WHERE portfolio_id =:portfolio_id");
+        $selectTickers->execute(['portfolio_id' => $_SESSION['currentPortId']]);
+        $fetchType = $selectTickers->setFetchMode(PDO::FETCH_NUM);
+ 
+        $condition = true;
+        $entry = '';
+        while($condition){
+            $tickers = $selectTickers->fetch();
+                        if(!$checked){
+                if(gettype($tickers) == 'array'){
+                    $checked = true;
+                }
+                else{
+                    $alert = "The portfolio you are trying to graph currently contains no assets. If this portfolio is owned by you, please search for an asset and add it to display portfolio information. If you are viewing a public portfolio, then either the portfolio has no assets or was deleted, please try viewing a different portfolio.";
+                    phpAlert($alert);  
+
+            }
+            }
+            if($tickers == ""){
+                $entry = rtrim($entry, ',');
+                $condition = false;
+            }
+
+            else{
+                $entry = $entry.'"'.$tickers[0].'",';
+            }
+        } 
         }
     }
     catch(PDOException $error) {
