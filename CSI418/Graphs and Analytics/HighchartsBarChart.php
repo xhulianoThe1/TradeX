@@ -252,11 +252,11 @@ function createChart() {
 
 $.each(names, function(i, name) {
 
-  $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/' + name.toLowerCase() + '.json?auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
+  $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date=2015-05-01&column_index=11&auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
     var newData = [];
 
-    data.data.forEach(function(point) {
-      newData.push([point[11]]);
+    data.dataset.data.forEach(function(point) {
+      newData.push([point[1]]);
     });
 
     //newData.reverse();
