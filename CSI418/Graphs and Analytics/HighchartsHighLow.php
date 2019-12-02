@@ -195,16 +195,6 @@ if(isset($_SESSION['tickerReport'])){
         $entry = '';
         while($condition){
             $tickers = $selectTickers->fetch();
-            if(!$checked){
-                if(gettype($tickers) == 'array'){
-                    $checked = true;
-                }
-                else{
-                    $alert = "The portfolio you are trying to graph currently contains no assets. If this portfolio is owned by you, please search for an asset and add it to display portfolio information. If you are viewing a public portfolio, then either the portfolio has no assets or was deleted, please try viewing a different portfolio.";
-                    phpAlert($alert);  
-
-            }
-            }
             if($tickers == ""){
                 $entry = rtrim($entry, ',');
                 $condition = false;
@@ -224,6 +214,16 @@ if(isset($_SESSION['tickerReport'])){
         $entry = '';
         while($condition){
             $tickers = $selectTickers->fetch();
+                        if(!$checked){
+                if(gettype($tickers) == 'array'){
+                    $checked = true;
+                }
+                else{
+                    $alert = "The portfolio you are trying to graph currently contains no assets. If this portfolio is owned by you, please search for an asset and add it to display portfolio information. If you are viewing a public portfolio, then either the portfolio has no assets or was deleted, please try viewing a different portfolio.";
+                    phpAlert($alert);  
+
+            }
+            }
             if($tickers == ""){
                 $entry = rtrim($entry, ',');
                 $condition = false;
@@ -384,6 +384,10 @@ input[type=submit] {
 </head>     
 <body>
 <h1><b> <?php echo $_SESSION['nameOfPortfolio'] ?></b></h1>
+    
+<?php
+if($_SESSION['deleteMode']){
+    ?> 
 
 <h5>Search for an asset here [type the name and select from the dropdown, or type the ticker surrounded by '()' ]:</h5>
 
@@ -3690,6 +3694,7 @@ autocomplete(document.getElementById("myInput"), tickers);
 </script>
     
    <?php
+}
 echo "<table style='border: solid 1px black;'>";
  echo "<h2><b>Stocks in Current Portfolio:<b><h2></tr>";
 

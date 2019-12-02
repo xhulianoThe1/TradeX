@@ -352,6 +352,10 @@ input[type=submit] {
 <body>
 <h1><b> <?php echo $_SESSION['nameOfPortfolio'] ?></b></h1>
 
+    
+<?php
+if($_SESSION['deleteMode']){
+    ?> 
 <h5>Search for an asset here [type the name and select from the dropdown, or type the ticker surrounded by '()' ]:</h5>
 
     
@@ -3663,6 +3667,7 @@ autocomplete(document.getElementById("myInput"), tickers);
 </script>
     
    <?php
+}
 echo "<table style='border: solid 1px black;'>";
  echo "<h2><b>Stocks in Current Portfolio:<b><h2></tr>";
 
