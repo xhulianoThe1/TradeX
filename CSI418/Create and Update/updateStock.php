@@ -88,7 +88,11 @@ try {
         }
     }
 
-
+    if($_POST['amt'] <=0 ){
+        $_SESSION['tickerReport'] = "When initially adding an asset to your portfolio, you must add a positive amount of assets or they will not be added. Please try again.";
+                        header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
+                exit;
+    }
     
     $sql = "INSERT INTO stocks (ticker,portfolio_id, amtOfStock) VALUES (:ticker,:currentPortId,:amt)";
     $stmt = $connection->prepare($sql);
