@@ -410,8 +410,9 @@ if($_SESSION['deleteMode']){
 <!--Make sure the form has the autocomplete function switched off:-->
 <form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
   <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="stockName" placeholder="Enter a stock name">
+    <input id="myInput" type="text" name="stockName" placeholder="Enter a stock name"required="true">
   </div>
+          <input id='amtOfStock' type='number' name='amt' placeholder='Number of stocks to add'required="true">
   <input type="submit">
 </form>
     <br>

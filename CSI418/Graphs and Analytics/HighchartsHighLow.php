@@ -105,7 +105,7 @@ if(isset($_SESSION['tickerReport'])){
         <a class="nav-link" href="SMA.php">Simple Moving Average Analytic</a>
       </li>
                 	  <li class="nav-item">
-        <a class="nav-link" href="MACD.php">Moving Average Convergence/Divergence Analytic</a>
+        <a class="nav-link" href="MACD.php">MACD Analytic</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="totalLineChart.php">Total Open Line Chart</a>
@@ -394,8 +394,9 @@ if($_SESSION['deleteMode']){
 <!--Make sure the form has the autocomplete function switched off:-->
 <form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
   <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="stockName" placeholder="Enter a stock name">
+    <input id="myInput" type="text" name="stockName" placeholder="Enter a stock name"required="true">
   </div>
+          <input id='amtOfStock' type='number' name='amt' placeholder='Number of stocks to add'required="true">
   <input type="submit">
 </form>
     

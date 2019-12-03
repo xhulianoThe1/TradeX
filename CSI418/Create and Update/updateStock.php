@@ -50,32 +50,61 @@ if($exists){
 try {
     $connection = new PDO($dsn, $username, $password, $options);
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-    $checkStock = "SELECT ticker FROM stocks WHERE portfolio_id =:currentPortId";
+    $checkStock = "SELECT ticker, amtOfStock FROM stocks WHERE portfolio_id =:currentPortId";
     $checkStock = $connection->prepare($checkStock);
     $checkStock->execute(['currentPortId'=>$_SESSION['currentPortId']]);
     $checkStock = $checkStock->fetchAll();
     $checkStock = array_values($checkStock);
     foreach($checkStock as $value){
         if($value[0] == $tickerToAdd){
-            $_SESSION['tickerReport'] = "The asset you attempted to add is already a part of your portfolio! Please try again with a different asset.";
-            header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
-            exit;
+            $sql = "UPDATE stocks set amtOfStock = amtOfStock +:amt WHERE ticker=:ticker AND portfolio_id=:currentPortId";
+            $stmt = $connection->prepare($sql);
+                $data2 = [
+        'amt' => $_POST['amt'],
+                    'ticker'=> $tickerToAdd,
+                    'currentPortId'=>$_SESSION['currentPortId'],
+];
+            $stmt->execute($data2);
+            
+            $sql = 'SELECT amtOfStock FROM stocks WHERE ticker=:ticker AND portfolio_id=:currentPortId';
+            $stmt = $connection->prepare($sql);
+            
+                            $data2 = [
+                    'ticker'=> $tickerToAdd,
+                    'currentPortId'=>$_SESSION['currentPortId'],
+];
+            
+            
+            $stmt->execute($data2);
+            $stmt->setFetchMode(PDO::FETCH_NUM);
+            $amt = $stmt->fetch()[0];
+            if($amt <= 0){
+                $_SESSION['nameOfTicker'] = $tickerToAdd;
+                header("Location: ../Delete/removeStock.php");
+                exit;
+            }
+                header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
+                exit;
         }
     }
+
+
     
-    $sql = "INSERT INTO stocks (ticker,portfolio_id) VALUES (:ticker,:currentPortId)";
+    $sql = "INSERT INTO stocks (ticker,portfolio_id, amtOfStock) VALUES (:ticker,:currentPortId,:amt)";
     $stmt = $connection->prepare($sql);
     
     $data2 = [
     'ticker' => $tickerToAdd,
     'currentPortId' => $_SESSION['currentPortId'],
+        'amt' => $_POST['amt'],
 ];
     
     $stmt->execute($data2);
     header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
     exit;
+
 }
-catch(PDOException $e)
+    catch(PDOException $e)
     {
     echo $sql . "<br>" . $e->getMessage();
     }
@@ -86,4 +115,6 @@ else{
         header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
     exit;
 }
+
+
 ?>

@@ -22,6 +22,7 @@ try {
 ];
     
     $stmt->execute($data);
+    $_SESSION['tickerReport'] = "The asset associated with ticker: ".$_SESSION['nameOfTicker']." has been completely removed from your portfolio.";
    header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
    exit;
 }

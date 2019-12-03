@@ -105,7 +105,7 @@ if(isset($_SESSION['tickerReport'])){
         <a class="nav-link" href="SMA.php">Simple Moving Average Analytic</a>
       </li>
                 	  <li class="nav-item">
-        <a class="nav-link" href="MACD.php">Moving Average Convergence/Divergence Analytic</a>
+        <a class="nav-link" href="MACD.php">MACD Analytic</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="totalLineChart.php">Total Open Line Chart</a>
@@ -215,8 +215,20 @@ if(isset($_SESSION['tickerReport'])){
         echo "pdo error";
   }
 
+        $stmt = $connection->prepare("SELECT amtOfStock FROM stocks WHERE portfolio_id =:portfolio_id");
+        $stmt->execute(['portfolio_id'=>$_SESSION['currentPortId']]);
+        $fetchType = $stmt->setFetchMode(PDO::FETCH_NUM);
+      $amounts = $stmt->fetchAll();
+      $tally = 0;
+      
 ?>
+
 <script>
+    
+    var amounts = new Array();
+        <?php foreach($amounts as $key => $val){ ?>
+        amounts.push('<?php echo $val[0]; ?>');
+    <?php } ?>
 var seriesOptions = [],
 	seriesCounter = 0,
 	names = [<?php echo $entry ?>];
@@ -265,7 +277,7 @@ $.each(names, function(i, name) {
 
   $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date=2015-05-01&column_index=11&auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
     var newData = []
-		NumberOfStocks = 5;
+		NumberOfStocks = amounts[i];
 
     data.dataset.data.forEach(function(point) {
       newData.push([Number(point[1])*NumberOfStocks]);
@@ -372,8 +384,9 @@ if($_SESSION['deleteMode']){
 <!--Make sure the form has the autocomplete function switched off:-->
 <form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
   <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="stockName" placeholder="Enter a stock name">
+    <input id="myInput" type="text" name="stockName" placeholder="Enter a stock name"required="true">
   </div>
+          <input id='amtOfStock' type='number' name='amt' placeholder='Number of stocks to add'required="true">
   <input type="submit">
 </form>
     
