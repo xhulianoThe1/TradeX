@@ -65,10 +65,18 @@ font-family: 'Marck Script', cursive;
 {
     background-color: #4f4c4c;
 }
-
-
-
-
+/*the code below is for the user.php and something i am still working on (Mike w) */
+#ec
+{
+    width: 150px; 
+    border: 3px solid black; 
+    font-weight: bold; 
+    font-size:30px;
+}
+#ec2
+{
+    background-color:red   
+}
 
 
 

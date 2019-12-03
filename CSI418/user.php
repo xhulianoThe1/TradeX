@@ -39,7 +39,8 @@ if(isset($_SESSION['portExists'])){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="templates/style.css">
+  <link rel="stylesheet" href="templates/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Cinzel|Marck+Script|Philosopher&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -80,8 +81,8 @@ input[type=submit] {
 <body>
     
     
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
-  <a class="navbar-brand" href="homepage.php">Trade X - <?php echo $_SESSION['uname'] ?></a>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" id="logo" href="homepage.php">Trade X - <?php echo $_SESSION['uname'] ?></a>
    <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -113,6 +114,9 @@ input[type=submit] {
 </nav>
 
     <!--Content Div's-->
+<br>
+<br>
+<div class="container">
     <h2><b> Create New Portfolio:</b></h2>
     <form action="Create and Update/createPortfolio.php" method="post">
 <strong>Enter portfolio name here: </strong><input type="text" name="portfolioName" placeholder="'Portfolio Name'" autocomplete="off" required="true"><br>
@@ -150,13 +154,13 @@ input[type=submit] {
     }
 };
    </script> 
-    
+  
   <?php
     $_SESSION['nameOfPortfolio'] ='';
     require "Data Initialization/config.php";
     require "Data Initialization/common.php";
-echo "<table style='border: solid 1px black;'>";
- echo "<h2><b>Your Portfolios</b><h2></tr>";
+    echo "<table style='border: solid 1px black;'>";
+    echo "<h2><b>Your Portfolios</b><h2></tr>";
 
 class TableRowsZ extends RecursiveIteratorIterator {
     function __construct($it) {
@@ -168,13 +172,13 @@ class TableRowsZ extends RecursiveIteratorIterator {
     }
 
     function beginChildren() {
-        echo "<tr style='  background-color: #4CAF50; color: white;'>";
+        echo "<tr style=' background-color: #4CAF50; color: white;'>";
     }
 
     function endChildren() {
         echo "</tr>" . "\n";
-                echo '<td style="width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;"> <form action="Helper Files/getPortfolioName.php" method="post"><span><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></span></form>  ';
-                echo '<form action="Delete/deletePortfolio.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['$currentId'].'"value="Delete ' .$_SESSION['nameOfPortfolio'].' from Portfolios"></form></span </td>';
+                echo '<td id="ec"> <form action="Helper Files/getPortfolioName.php" method="post"><span><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></span></form>  ';
+                echo '<form action="Delete/deletePortfolio.php" method="post"><input id="ec2" type="submit" name= "'.$_SESSION['$currentId'].'"value="Delete ' .$_SESSION['nameOfPortfolio'].' from Portfolios"></form></span </td>';
     }
 }
  class TableRowsPublic extends RecursiveIteratorIterator {
@@ -203,7 +207,7 @@ class TableRowsZ extends RecursiveIteratorIterator {
     }
 
     function current() {
-        return "<td style='width: 150px; border: 3px solid black;  font-size:25px;'>" . parent::current(). "</td>";
+        return "<td style='width: 150px; border: 3px solid black;   font-size:25px;'>" . parent::current(). "</td>";
     }
 
     function beginChildren() {
@@ -259,6 +263,8 @@ try {
             }
         
     }
+     
+  
 
     //same code but now for public portfolios
     echo "</table><br>";
@@ -317,6 +323,8 @@ catch(PDOException $e) {
 echo "</table>";
 
 ?>
-   
+        
+
+</div>
 </body>
 </html>
