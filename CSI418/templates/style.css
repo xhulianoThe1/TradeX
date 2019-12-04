@@ -9,13 +9,6 @@ body
 {
   background-color: white;
  
-  border: 2px solid #555555;
-  padding: 50px 75px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius:10%;
-  opacity: 0.5;
   font-size: 20px;
   
 
@@ -50,34 +43,18 @@ font-family: 'Marck Script', cursive;
    
 }
 
-.modal-header
-{
-    background-color:#4f4c4c;
-    color: white;
-    
-}
-.modal-body
-{
-    background-color: #4f4c4c;
-    color:white;
-}
-.modal-footer
-{
-    background-color: #4f4c4c;
-}
+
 /*the code below is for the user.php and something i am still working on (Mike w) */
 #ec
 {
     width: 150px; 
-    border: 3px solid black; 
     font-weight: bold; 
     font-size:30px;
 }
 #ec2
 {
-    background-color:red   
+    background-color:red;  
 }
-
 
 
 

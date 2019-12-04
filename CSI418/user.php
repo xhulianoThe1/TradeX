@@ -45,7 +45,7 @@ if(isset($_SESSION['portExists'])){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
-        input {
+input {
   border: 1px solid transparent;
   background-color: #f1f1f1;
   padding: 10px;
@@ -54,11 +54,11 @@ if(isset($_SESSION['portExists'])){
 
 input[type=text] {
   background-color: #f1f1f1;
-  width: 50%;
+  width: 70%;
 }
 
 input[type=submit] {
-  background-color: lightblue;
+  background-color: blue;
   color: #fff;
   cursor: pointer;
 }
@@ -81,7 +81,7 @@ input[type=submit] {
 <body>
     
     
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <a class="navbar-brand" id="logo" href="homepage.php">Trade X - <?php echo $_SESSION['uname'] ?></a>
    <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -116,50 +116,39 @@ input[type=submit] {
     <!--Content Div's-->
 <br>
 <br>
-<div class="container">
-    <h2><b> Create New Portfolio:</b></h2>
-    <form action="Create and Update/createPortfolio.php" method="post">
-<strong>Enter portfolio name here: </strong><input type="text" name="portfolioName" placeholder="'Portfolio Name'" autocomplete="off" required="true"><br>
-<b>Portfolio Visibility: </b> <br> Private <input type ="radio" name ="visibility" value="0" checked> 
-       <br> Public <input type ="radio" name ="visibility" value="1">
-        <br>
-<input type="submit">
-</form>
-    <br>
-    
-    
- <script>
-    //  https://stackoverflow.com/questions/667555/how-to-detect-idle-time-in-javascript-elegantly?page=1&tab=votes#tab-top
-    var inactivityTime = function () {
-    var time;
-    window.onload = resetTimer;
-    // DOM Events
-    document.onmousemove = resetTimer;
-    document.onkeypress = resetTimer;
-    document.onmousedown = resetTimer; // touchscreen presses
-    document.ontouchstart = resetTimer;
-    document.onclick = resetTimer;     // touchpad clicks
-    document.onkeypress = resetTimer;
+<div class="container">    
+<div class="card-columns">
+    <div class="card bg-info">
+      <div class="card-body card-md text-left">
+        <div class="container" >
 
-        //this is a separate logout page for users who are automatically logged out
-    function logout() {
-        location.href = 'Helper Files/inactiveLogout.php';
-        
-    }
-
-    function resetTimer() {
-        clearTimeout(time);
-        time = setTimeout(logout, 900000)
-        // 1000 milliseconds = 1 second, so 900000 is 15 minutes
-    }
-};
-   </script> 
-  
+     <h2><b> Create New Portfolio:</b></h2>
+     <form action="Create and Update/createPortfolio.php" method="post">
+     <strong>Enter portfolio name here: </strong><input type="text" name="portfolioName" placeholder="'Portfolio Name'" autocomplete="off" required="true"><br>
+     <b>Portfolio Visibility: </b> 
+     <br>Private <input type ="radio" name ="visibility" value="0" checked> 
+     <br>Public <input type ="radio" name ="visibility" value="1">
+     <br>
+     <input type="submit">
+     </form>
+     <br>
+            
+         </div>
+     </div>
+    </div>
+    <div class="card bg-info">
+      <div class="card-body card-md text-left">
+        <div class="container">
+          <h3><strong>Portfolio's</strong></h3>
+          <a href="#NewPort" class="btn btn-dark" data-toggle="collapse">View Portfolio's</a>
+          <div id="NewPort" class="collapse">
+   
+ 
   <?php
     $_SESSION['nameOfPortfolio'] ='';
     require "Data Initialization/config.php";
     require "Data Initialization/common.php";
-    echo "<table style='border: solid 1px black;'>";
+    echo "<table style='border: 4px solid black;  border-radius: 100%;'>";
     echo "<h2><b>Your Portfolios</b><h2></tr>";
 
 class TableRowsZ extends RecursiveIteratorIterator {
@@ -168,11 +157,11 @@ class TableRowsZ extends RecursiveIteratorIterator {
     }
 
     function current() {
-        return "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;'>" . parent::current(). "</td>";
+        return "<td style='width: 150px;  border: 4px solid black; border:font-weight: bold; font-size:30px;'>" . parent::current(). "</td>";
     }
 
     function beginChildren() {
-        echo "<tr style=' background-color: #4CAF50; color: white;'>";
+        echo "<tr style=' padding-top: 12px; padding-bottom: 12px; background-color: #4CAF50; color: white;'>";
     }
 
     function endChildren() {
@@ -187,16 +176,16 @@ class TableRowsZ extends RecursiveIteratorIterator {
     }
 
     function current() {
-        return "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;'>" . parent::current(). "</td>";
+        return "<td style='width: 150px;font-weight: bold; border: 4px solid black; font-size:30px;'>" . parent::current(). "</td>";
     }
 
     function beginChildren() {
-        echo "<tr style='  background-color: #4CAF50; color: white;'>";
+        echo "<tr style=' padding-top: 12px; padding-bottom: 12px;  background-color: #4CAF50; color: whitesmoke;'>";
     }
 
     function endChildren() {
         echo "</tr>" . "\n";
-                echo '<td style="width: 150px; border: 3px solid black; font-weight: bold; font-size:30px;"> <form action="Helper Files/getPortfolioName.php" method="post"><span><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></span> <input type ="hidden" name="'.$_SESSION['publicPortUser'].'"></form></td>  ';
+                echo '<td style="width: 150px; font-weight: bold; font-size:30px;"> <form action="Helper Files/getPortfolioName.php" method="post"><span><input type="submit" name= "'.$_SESSION['nameOfPortfolio'].'"value="Open ' .$_SESSION['nameOfPortfolio'].' in Graphical View"></span> <input type ="hidden" name="'.$_SESSION['publicPortUser'].'"></form></td>  ';
     }
 }     
       
@@ -207,7 +196,7 @@ class TableRowsZ extends RecursiveIteratorIterator {
     }
 
     function current() {
-        return "<td style='width: 150px; border: 3px solid black;   font-size:25px;'>" . parent::current(). "</td>";
+        return "<td style='width:  150px; font-size:25px;'>" . parent::current(). "</td>";
     }
 
     function beginChildren() {
@@ -263,12 +252,12 @@ try {
             }
         
     }
-     
+ 
   
-
+    
     //same code but now for public portfolios
     echo "</table><br>";
-    echo "<table style='border: solid 1px black;'>";
+    echo "<table style='border: 4px solid black;'>";
     echo "<h2><b>Public Portfolios</b> </tr>";
     
         $portfolioNames = $connection->prepare("SELECT portfolio_name FROM portfolios WHERE visibility = 1 AND portfolios.user_id <>:user_id");
@@ -323,7 +312,40 @@ catch(PDOException $e) {
 echo "</table>";
 
 ?>
+ </div>
+        </div> 
+      </div>
+    </div>
+</div>
+
+
+    
+ <script>
+    //  https://stackoverflow.com/questions/667555/how-to-detect-idle-time-in-javascript-elegantly?page=1&tab=votes#tab-top
+    var inactivityTime = function () {
+    var time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+    document.onkeypress = resetTimer;
+    document.onmousedown = resetTimer; // touchscreen presses
+    document.ontouchstart = resetTimer;
+    document.onclick = resetTimer;     // touchpad clicks
+    document.onkeypress = resetTimer;
+
+        //this is a separate logout page for users who are automatically logged out
+    function logout() {
+        location.href = 'Helper Files/inactiveLogout.php';
         
+    }
+
+    function resetTimer() {
+        clearTimeout(time);
+        time = setTimeout(logout, 900000)
+        // 1000 milliseconds = 1 second, so 900000 is 15 minutes
+    }
+};
+   </script>   
 
 </div>
 </body>

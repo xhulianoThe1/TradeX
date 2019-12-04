@@ -384,25 +384,92 @@ input[type=submit] {
 </style>
 </head>     
 <body>
-<h1><b> <?php echo $_SESSION['nameOfPortfolio'] ?></b></h1>
+<br>
+<br>
+<div class="container">
+<h2><b>Portfolio: <?php echo $_SESSION['nameOfPortfolio'] ?></b></h2>
+<div class="card-columns">
+    <div class="card bg-info">
+      <div class="card-body card-md text-left">
+       <div class="container" >
+
+            <h5><strong>Search for an asset here</strong> [type the name and select from the dropdown, or type the ticker surrounded by '()'. ]:
+             <!--Make sure the form has the autocomplete function switched off:-->
+     <form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
+     <div class="autocomplete" style="width:300px;">
+     <input id="myInput" type="text" name="stockName" placeholder="Enter a stock name"required="true">
+     </div>
+     <br>
+         <h5><strong>Input a number </strong>to add[any number greater than 0] or removing[any number below 0] shares from the asset you have selected.</h5>
+     <input id='amtOfStock' type='number' name='amt' placeholder='Number of stocks to add'required="true">
+     <br>
+     <input type="submit">
+     </form>
+     <br>
+            
+         </div>
+     </div>
+    </div>
+    <div class="card bg-info">
+      <div class="card-body card-md text-left">
+        <div class="container">
+         <?php
+
     
-<?php
-if($_SESSION['deleteMode']){
-    ?> 
+echo "<table style='border: solid 1px black;'>";
+ echo "<h2><b>Stocks in Current Portfolio:<b><h2></tr>";
 
-<h5>Search for an asset here [type the name and select from the dropdown, or type the ticker surrounded by '()' ]:</h5>
 
-<!--Make sure the form has the autocomplete function switched off:-->
-<form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
-  <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="stockName" placeholder="Enter a stock name"required="true">
-  </div>
-          <input id='amtOfStock' type='number' name='amt' placeholder='Number of stocks to add'required="true">
-  <input type="submit">
-</form>
-    
+      class TableRows extends RecursiveIteratorIterator {
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
 
-<script>
+    function current() {
+        return "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:20px;'>" . parent::current(). "</td>";
+    }
+
+    function beginChildren() {
+        echo "<tr style='  background-color: #4CAF50; color: white;'>";
+    }
+
+    function endChildren() {
+        echo "</tr>" . "\n";
+        if($_SESSION['deleteMode'] == true){
+            echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
+        }
+        else{
+            
+        }
+
+    }
+}
+
+
+try {
+    $connection = new PDO($dsn, $username, $password, $options);
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        
+        $retrieveTickers = $connection->prepare("SELECT ticker FROM stocks WHERE portfolio_id=:pid");
+        $retrieveTickers->execute(['pid'=>$_SESSION['currentPortId']]);
+        $result2 = $retrieveTickers->setFetchMode(PDO::FETCH_ASSOC);
+
+            foreach(new TableRows(new RecursiveArrayIterator($retrieveTickers->fetchAll())) as $o=>$p) {
+                echo $p;
+                $_SESSION['nameOfTicker'] = $p;
+                $_SESSION['nameOfTicker'] = ltrim($p, "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:20px;'>");
+                $_SESSION['nameOfTicker'] = str_replace("</td>","",$_SESSION['nameOfTicker']);
+            }
+        
+    }
+catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+echo "</table>";
+
+?>   
+            <script>
     //https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -3694,69 +3761,14 @@ var tickers = ["Apple Inc (AAPL) ",
 /*initiate the autocomplete function on the "myInput" element, and pass along the tickers array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), tickers);
 </script>
-    
-   <?php
-}
-echo "<table style='border: solid 1px black;'>";
- echo "<h2><b>Stocks in Current Portfolio:<b><h2></tr>";
+        </div> 
+      </div>
+    </div>
+</div>
 
-
-      class TableRows extends RecursiveIteratorIterator {
-    function __construct($it) {
-        parent::__construct($it, self::LEAVES_ONLY);
-    }
-
-    function current() {
-        return "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:20px;'>" . parent::current(). "</td>";
-    }
-
-    function beginChildren() {
-        echo "<tr style='  background-color: #4CAF50; color: white;'>";
-    }
-
-    function endChildren() {
-        echo "</tr>" . "\n";
-        echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="../Helper Files/chooseStock.php" method="post"><input type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to display ' .$_SESSION['nameOfTicker'].' from Portfolio"></form>';
-if($_SESSION['deleteMode'] == true){
-echo '<form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form>';
-
-        }
-        else{
-            
-        }
-
-    }
-}
-
-
-try {
-    $connection = new PDO($dsn, $username, $password, $options);
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        
-        $retrieveTickers = $connection->prepare("SELECT ticker FROM stocks WHERE portfolio_id=:pid");
-        $retrieveTickers->execute(['pid'=>$_SESSION['currentPortId']]);
-        $result2 = $retrieveTickers->setFetchMode(PDO::FETCH_ASSOC);
-
-            foreach(new TableRows(new RecursiveArrayIterator($retrieveTickers->fetchAll())) as $o=>$p) {
-                echo $p;
-                $_SESSION['nameOfTicker'] = $p;
-                $_SESSION['nameOfTicker'] = ltrim($p, "<td style='width: 150px; border: 3px solid black; font-weight: bold; font-size:20px;'>");
-                $_SESSION['nameOfTicker'] = str_replace("</td>","",$_SESSION['nameOfTicker']);
-            }
-        
-    }
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-echo "</table>";
-
-?>   
-
+</div>
 </body>
 </html>
-
-    
     
 
 </body>
