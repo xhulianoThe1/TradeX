@@ -109,7 +109,7 @@ if(isset($_SESSION['tickerReport'])){
         <a class="nav-link" href="SMA.php">Simple Moving Average Analytic</a>
       </li>
         	  <li class="nav-item">
-        <a class="nav-link" href="MACD.php">Moving Average Convergence/Divergence Analytic</a>
+        <a class="nav-link" href="MACD.php">MACD Analytic</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="totalLineChart.php">Total Open Line Chart</a>
@@ -245,9 +245,11 @@ if(isset($_SESSION['tickerReport'])){
         echo "pdo error";
   }
 
+
 ?> 
 
 <script>
+
 var ohlc = [],
 	groupingUnits = [[
             'week',                         // unit name
@@ -448,8 +450,9 @@ echo "<table style='border: solid 1px black;'>";
 
     function endChildren() {
         echo "</tr>" . "\n";
+                echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"><form action="../Helper Files/chooseStock.php" method="post"><input type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to display ' .$_SESSION['nameOfTicker'].' from Portfolio"></form>';
         if($_SESSION['deleteMode'] == true){
-            echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
+            echo ' <form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
         }
         else{
             

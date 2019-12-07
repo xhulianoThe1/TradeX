@@ -49,22 +49,39 @@ foreach($availableTickers as $value){
 if($exists){
 try {
     $connection = new PDO($dsn, $username, $password, $options);
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-    $checkStock = "SELECT ticker, amtOfStock FROM stocks WHERE portfolio_id =:currentPortId";
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+    
+    $checkStock = "SELECT ticker, datePurchased FROM stocks WHERE portfolio_id =:currentPortId";
     $checkStock = $connection->prepare($checkStock);
     $checkStock->execute(['currentPortId'=>$_SESSION['currentPortId']]);
     $checkStock = $checkStock->fetchAll();
     $checkStock = array_values($checkStock);
+    $validTicker = false;
+    
     foreach($checkStock as $value){
         if($value[0] == $tickerToAdd){
-            $sql = "UPDATE stocks set amtOfStock = amtOfStock +:amt WHERE ticker=:ticker AND portfolio_id=:currentPortId";
+            $validTicker = true;
+        }
+            if($value[1] == $_POST['datePurchased'] && $validTicker == true){
+            $sql = "UPDATE stocks set amtOfStock = amtOfStock +:amt WHERE ticker=:ticker AND portfolio_id=:currentPortId AND datePurchased=:date";
             $stmt = $connection->prepare($sql);
                 $data2 = [
         'amt' => $_POST['amt'],
                     'ticker'=> $tickerToAdd,
                     'currentPortId'=>$_SESSION['currentPortId'],
+                    'date' =>$value[1],
 ];
             $stmt->execute($data2);
+
+                
+                if($_POST['amt'] < 0){
+                    $_SESSION['tickerReport'] = abs($_POST['amt'])." shares were removed from the asset associated with ticker: ".$tickerToAdd." purchased on ".$value[1];
+                }
+                if($_POST['amt'] > 0){
+                    $_SESSION['tickerReport'] = $_POST['amt']." shares were added to the asset associated with ticker: ".$tickerToAdd." purchased on ".$value[1];
+                }
+
+
             
             $sql = 'SELECT amtOfStock FROM stocks WHERE ticker=:ticker AND portfolio_id=:currentPortId';
             $stmt = $connection->prepare($sql);
@@ -85,27 +102,32 @@ try {
             }
                 header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
                 exit;
-        }
+            }
+            else{
+                $validTicker = false;
+            }
     }
 
     if($_POST['amt'] <=0 ){
         $_SESSION['tickerReport'] = "When initially adding an asset to your portfolio, you must add a positive amount of assets or they will not be added. Please try again.";
-                        header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
-                exit;
+                header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
+               exit;
     }
-    
-    $sql = "INSERT INTO stocks (ticker,portfolio_id, amtOfStock) VALUES (:ticker,:currentPortId,:amt)";
+    else{
+    $sql = "INSERT INTO stocks (ticker,portfolio_id, amtOfStock, datePurchased) VALUES (:ticker,:currentPortId,:amt,:date)";
     $stmt = $connection->prepare($sql);
     
     $data2 = [
     'ticker' => $tickerToAdd,
     'currentPortId' => $_SESSION['currentPortId'],
         'amt' => $_POST['amt'],
+        'date' => $_POST['datePurchased'],
 ];
     
     $stmt->execute($data2);
     header("Location: ../Graphs and Analytics/".$_SESSION['graphCameFrom']);
     exit;
+    }
 
 }
     catch(PDOException $e)

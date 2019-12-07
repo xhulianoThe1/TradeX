@@ -217,16 +217,24 @@ if(isset($_SESSION['tickerReport'])){
         echo "pdo error";
   }
 
+        //amount of each stock retrieved
         $stmt = $connection->prepare("SELECT amtOfStock FROM stocks WHERE portfolio_id =:portfolio_id");
         $stmt->execute(['portfolio_id'=>$_SESSION['currentPortId']]);
         $fetchType = $stmt->setFetchMode(PDO::FETCH_NUM);
-      $amounts = $stmt->fetchAll();
-      $tally = 0;
+        $amounts = $stmt->fetchAll();
       
+            //date purchased for each stock retrieved
+        $stmt = $connection->prepare("SELECT datePurchased FROM stocks WHERE portfolio_id =:portfolio_id");
+        $stmt->execute(['portfolio_id'=>$_SESSION['currentPortId']]);
+        $fetchType = $stmt->setFetchMode(PDO::FETCH_NUM);
+        $_SESSION['date'] = $stmt->fetchAll();
 ?>
 
 <script>
-    
+    var dates = new Array();
+        <?php foreach($_SESSION['date'] as $key => $val){ ?>
+        dates.push('<?php echo $val[0]; ?>');
+    <?php } ?>
     var amounts = new Array();
         <?php foreach($amounts as $key => $val){ ?>
         amounts.push('<?php echo $val[0]; ?>');
@@ -265,8 +273,7 @@ function createChart() {
 }
 
 $.each(names, function(i, name) {
-
-  $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date=2015-05-01&column_index=11&auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
+  $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date='+dates[i]+'&column_index=11&auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
     var newData = []
 		NumberOfStocks = amounts[i];
 
@@ -274,6 +281,9 @@ $.each(names, function(i, name) {
       newData.push([point[1]]);
     });
 
+      document.getElementById('individualPrice' + i).innerHTML = 'Latest Adj. Closing Price: $'+ (newData[0]);
+      document.getElementById('totalPrice' + i).innerHTML = 'Total Value the shares of this Asset Contribute to Portfolio: $'+ newData[0] * NumberOfStocks;
+      
     //newData.reverse();
 	
 	newData2 = newData[0];
@@ -381,9 +391,11 @@ input[type=submit] {
      <input id="myInput" type="text" name="stockName" placeholder="Enter a stock name"required="true">
      </div>
      <br>
-         <h5><strong>Input a number </strong>to add[any number greater than 0] or removing[any number below 0] shares from the asset you have selected.</h5>
+         <h5><strong>Input a number </strong>to add[any number greater than 0] or remove[any number below 0] shares from the asset you have selected:</h5>
      <input id='amtOfStock' type='number' name='amt' placeholder='Number of stocks to add'required="true">
      <br>
+         <h5><strong>Input the date </strong>this asset was purchased:</h5>
+        <input id='datePurchased' type='date'name='datePurchased' placeholder='Year(XXXX)-Month(XX)-Day(XX)'required='true'min='2015-01-01'max='2018-03-26'>
      <input type="submit">
      </form>
      <br>
@@ -398,7 +410,7 @@ input[type=submit] {
 
     
 echo "<table style='border: solid 1px black;'>";
- echo "<h2><b>Stocks in Current Portfolio:<b><h2></tr>";
+ echo "<h2><b>Assets in Current Portfolio [Date is shown as year-month-day]:<b><h2></tr>";
 
 
       class TableRows extends RecursiveIteratorIterator {
@@ -417,10 +429,12 @@ echo "<table style='border: solid 1px black;'>";
     function endChildren() {
         echo "</tr>" . "\n";
         if($_SESSION['deleteMode'] == true){
-            echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
+            echo '<td style="width: 500px; border: 3px solid black; font-weight: bold;"> <p>Number of shares of asset: '.$_SESSION['amounts'][$_SESSION['counter']][0].'</p><p> Date Shares Purchased: '.$_SESSION['date'][$_SESSION['counter']][0].' </p> <p id ="individualPrice'.$_SESSION['counter'].'"></p> <p id ="totalPrice'.$_SESSION['counter'].'"> <form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"> <input type="hidden" name="dateOrigin" value="'.$_SESSION['date'][$_SESSION['counter']][0].'"></form> <td>';
+            $_SESSION['counter'] = $_SESSION['counter'] + 1;
         }
         else{
-            
+                        echo '<td style="width: 500px; border: 3px solid black; font-weight: bold;"> <p>Number of shares of asset: '.$_SESSION['amounts'][$_SESSION['counter']][0].'</p><p> Date Shares Purchased: '.$_SESSION['date'][$_SESSION['counter']][0].' </p> <p id ="individualPrice'.$_SESSION['counter'].'"></p> <p id ="totalPrice'.$_SESSION['counter'].'"> <td>';
+            $_SESSION['counter'] = $_SESSION['counter'] + 1;
         }
 
     }
@@ -435,7 +449,7 @@ try {
         $retrieveTickers = $connection->prepare("SELECT ticker FROM stocks WHERE portfolio_id=:pid");
         $retrieveTickers->execute(['pid'=>$_SESSION['currentPortId']]);
         $result2 = $retrieveTickers->setFetchMode(PDO::FETCH_ASSOC);
-
+        $_SESSION['counter'] = 0;
             foreach(new TableRows(new RecursiveArrayIterator($retrieveTickers->fetchAll())) as $o=>$p) {
                 echo $p;
                 $_SESSION['nameOfTicker'] = $p;
