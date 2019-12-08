@@ -113,7 +113,7 @@ if(isset($_SESSION['tickerReport'])){
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="PortfolioComparison.php">Portfolio Comparison</a>
-      </li>
+      </li>        
     </ul>
     <!--End of Navbar links -->
   </div>  
@@ -233,7 +233,7 @@ if(isset($_SESSION['tickerReport'])){
 ?>
 
 <script>
-        var dates = new Array();
+    var dates = new Array();
         <?php foreach($_SESSION['date'] as $key => $val){ ?>
         dates.push('<?php echo $val[0]; ?>');
     <?php } ?>

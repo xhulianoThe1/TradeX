@@ -215,9 +215,30 @@ if(isset($_SESSION['tickerReport'])){
     catch(PDOException $error) {
         echo "pdo error";
   }
+            //amount of each stock retrieved
+        $stmt = $connection->prepare("SELECT amtOfStock FROM stocks WHERE portfolio_id =:portfolio_id");
+        $stmt->execute(['portfolio_id'=>$_SESSION['currentPortId']]);
+        $fetchType = $stmt->setFetchMode(PDO::FETCH_NUM);
+        $amounts = $stmt->fetchAll();
+      
+            //date purchased for each stock retrieved
+        $stmt = $connection->prepare("SELECT datePurchased FROM stocks WHERE portfolio_id =:portfolio_id");
+        $stmt->execute(['portfolio_id'=>$_SESSION['currentPortId']]);
+        $fetchType = $stmt->setFetchMode(PDO::FETCH_NUM);
+        $_SESSION['date'] = $stmt->fetchAll();    
+        
 ?>
 
 <script> 
+    var dates = new Array();
+        <?php foreach($_SESSION['date'] as $key => $val){ ?>
+        dates.push('<?php echo $val[0]; ?>');
+    <?php } ?>
+    var amounts = new Array();
+        <?php foreach($amounts as $key => $val){ ?>
+        amounts.push('<?php echo $val[0]; ?>');
+    <?php } ?>
+    
 	var ohlc = [],
 	groupingUnits = [[
             'week',                         // unit name
@@ -420,8 +441,9 @@ echo "<table style='border: solid 1px black;'>";
 
     function endChildren() {
         echo "</tr>" . "\n";
+                echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"><form action="../Helper Files/chooseStock.php" method="post"><input type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to display ' .$_SESSION['nameOfTicker'].' from Portfolio"></form>';
         if($_SESSION['deleteMode'] == true){
-            echo '<td style="width: 150px; border: 3px solid black; font-weight: bold;"> <form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
+            echo ' <form action="../Delete/removeStock.php" method="post"><input style="background-color:red" type="submit" name= "'.$_SESSION['nameOfTicker'].'"value="Click to remove ' .$_SESSION['nameOfTicker'].' from Portfolio"></form> <td>';
         }
         else{
             

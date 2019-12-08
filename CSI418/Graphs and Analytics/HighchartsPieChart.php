@@ -113,7 +113,7 @@ if(isset($_SESSION['tickerReport'])){
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="PortfolioComparison.php">Portfolio Comparison</a>
-      </li>
+      </li>  
     </ul>
     <!--End of Navbar links -->
   </div>  
