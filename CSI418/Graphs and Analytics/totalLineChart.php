@@ -3,6 +3,7 @@ session_start();
 $_SESSION['timestamp'] = time();
 $_SESSION['inactive'] = false;
 $_SESSION['graphCameFrom'] = 'totalLineChart.php';
+$_SESSION['chosenTicker'] = '';
 
 //checks to see if the user is actually logged in
 if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
@@ -112,7 +113,7 @@ if(isset($_SESSION['tickerReport'])){
         <a class="nav-link" href="totalLineChart.php">Total Open Line Chart</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="PortfolioComparison.php">Portfolio Comparison</a>
+        <a class="nav-link" href="../Helper Files/whichToCompare.php">Portfolio Comparison</a>
       </li>
     </ul>
     <!--End of Navbar links -->
@@ -314,8 +315,8 @@ function createChart() {
 }
 
 $.each(names, function(i, name) {
-
-  $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date='+dates[i]+'&column_index=11&auth_token=W8yzMDsJZ_TEcrPjWxGn', function(data) {
+      // alert(dates[i]);
+  $.getJSON('https://www.quandl.com/api/v3/datasets/WIKI/' + name.toLowerCase() + '.json?start_date='+dates[i]+'&column_index=11&auth_token=XWDL3_uZV9Gw1jsCZPmZ', function(data) {
     var date = [],
 		tot = [],
 		combine = [],
@@ -326,6 +327,7 @@ $.each(names, function(i, name) {
       date.push(new Date(point[0]).getTime());
 	  tot.push(point[1]);
     });
+     // alert(date[date.length-1]);
       
       document.getElementById('individualPrice' + i).innerHTML = 'Latest Adj. Closing Price: $'+ tot[0];
       document.getElementById('totalPrice' + i).innerHTML = 'Total Value the shares of this Asset Contribute to Portfolio: $'+ (tot[0]*NumberOfStocks);
@@ -453,7 +455,9 @@ input[type=submit] {
     <div class="card bg-info">
       <div class="card-body card-md text-left">
        <div class="container" >
-
+            <?php
+if($_SESSION['deleteMode']){
+    ?>
             <h5><strong>Search for an asset here</strong> [type the name and select from the dropdown, or type the ticker surrounded by '()'. ]:
              <!--Make sure the form has the autocomplete function switched off:-->
      <form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
@@ -477,7 +481,7 @@ input[type=submit] {
       <div class="card-body card-md text-left">
         <div class="container">
          <?php
-
+}
     
 echo "<table style='border: solid 1px black;'>";
  echo "<h2><b>Assets in Current Portfolio [Date is shown as year-month-day]:<b><h2></tr>";

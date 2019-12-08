@@ -112,7 +112,7 @@ if(isset($_SESSION['tickerReport'])){
         <a class="nav-link" href="totalLineChart.php">Total Open Line Chart</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="PortfolioComparison.php">Portfolio Comparison</a>
+        <a class="nav-link" href="../Helper Files/whichToCompare.php">Portfolio Comparison</a>
       </li>  
     </ul>
     <!--End of Navbar links -->
@@ -386,7 +386,9 @@ input[type=submit] {
     <div class="card bg-info">
       <div class="card-body card-md text-left">
        <div class="container" >
-
+            <?php
+if($_SESSION['deleteMode']){
+    ?>
             <h5><strong>Search for an asset here</strong> [type the name and select from the dropdown, or type the ticker surrounded by '()'. ]:
              <!--Make sure the form has the autocomplete function switched off:-->
      <form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
@@ -410,7 +412,7 @@ input[type=submit] {
       <div class="card-body card-md text-left">
         <div class="container">
          <?php
-
+}
     
 echo "<table style='border: solid 1px black;'>";
  echo "<h2><b>Assets in Current Portfolio [Date is shown as year-month-day]:<b><h2></tr>";

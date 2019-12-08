@@ -111,6 +111,9 @@ if(isset($_SESSION['tickerReport'])){
 	  <li class="nav-item">
         <a class="nav-link" href="totalLineChart.php">Total Open Line Chart</a>
       </li>
+        	  <li class="nav-item">
+        <a class="nav-link" href="../Helper Files/whichToCompare.php">Portfolio Comparison</a>
+      </li>
     </ul>
       
     <!--End of Navbar links -->
@@ -392,7 +395,9 @@ input[type=submit] {
     <div class="card bg-info">
       <div class="card-body card-md text-left">
        <div class="container" >
-
+            <?php
+if($_SESSION['deleteMode']){
+    ?>
             <h5><strong>Search for an asset here</strong> [type the name and select from the dropdown, or type the ticker surrounded by '()'. ]:
              <!--Make sure the form has the autocomplete function switched off:-->
      <form autocomplete="off" action="../Create and Update/updateStock.php"method="post">
@@ -403,6 +408,8 @@ input[type=submit] {
          <h5><strong>Input a number </strong>to add[any number greater than 0] or removing[any number below 0] shares from the asset you have selected.</h5>
      <input id='amtOfStock' type='number' name='amt' placeholder='Number of stocks to add'required="true">
      <br>
+                  <h5><strong>Input the date </strong>this asset was purchased:</h5>
+        <input id='datePurchased' type='date'name='datePurchased' placeholder='Year(XXXX)-Month(XX)-Day(XX)'required='true'min='2015-01-01'max='2018-03-26'>
      <input type="submit">
      </form>
      <br>
@@ -415,9 +422,9 @@ input[type=submit] {
         <div class="container">
          <?php
 
-    
+}
 echo "<table style='border: solid 1px black;'>";
- echo "<h2><b>Stocks in Current Portfolio:<b><h2></tr>";
+ echo "<h2><b>Assets in Current Portfolio [Tabular Data unavailable when viewing individual assets]:<b><h2></tr>";
 
 
       class TableRows extends RecursiveIteratorIterator {
