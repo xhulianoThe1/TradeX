@@ -103,6 +103,9 @@ if(isset($_SESSION['tickerReport'])){
 	  <li class="nav-item">
         <a class="nav-link" href="totalLineChart.php">Total Open Line Chart</a>
       </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="PortfolioComparison.php">Portfolio Comparison</a>
+      </li>
     </ul>
     <!--End of Navbar links -->
   </div>  
