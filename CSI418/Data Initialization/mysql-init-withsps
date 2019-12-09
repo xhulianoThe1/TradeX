@@ -30,8 +30,13 @@ CREATE TABLE USER (
 
 /* Creating Stocks table */
 CREATE TABLE STOCKS (
-	ticker VARCHAR(20) PRIMARY KEY NOT NULL, 
-	stock_name VARCHAR(20)  
+	stock_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT
+	ticker VARCHAR(20), 
+	portfolio_id INT,
+	FOREIGN KEY (portfolio_id) REFERENCES portfolios(portfolio_id)
+	amtOfStock INT,
+	datePurchased VARCHAR(20)
+	
 );
 
 /* Creating Portfolios table... one user can have many portfolios, so we create a foreign key to establish this relationship */
@@ -39,62 +44,8 @@ CREATE TABLE PORTFOLIOS (
 	portfolio_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 	portfolio_name VARCHAR(20),
     user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES USER(user_id)
-);
-
-/*This will act as a junction table to form a many to many relationship between stocks and portfolios */
-CREATE TABLE PORTFOLIOS_JUNCTION (
-    portfolio_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    ticker VARCHAR(20) NOT NULL,
-    FOREIGN KEY (portfolio_id) REFERENCES PORTFOLIOS(portfolio_id),
-    FOREIGN KEY (ticker) REFERENCES STOCKS(ticker)
+    FOREIGN KEY (user_id) REFERENCES USER(user_id),
+    	visibility INT,
 );
 
 
-
-
-
-
-/* NOW WE INSERT SAMPlE DATA INTO EACH DATA TABLE */
-
-/* Inserting sample end user*/
-INSERT INTO USER (first_name, last_name, email, password, is_admin) 
-VALUES
-	('John', 'Nicholas', 'jnicholas@yahoo.com', 'jnicholas123', False),
-	('George', 'Lopez', 'glopez@gmail.com', 'glopez123', False)
-;
-
-/* Inserting sample administrator */
-INSERT INTO USER (first_name, last_name, email, password, is_admin) 
-VALUES
-	('Michael', 'Nicholas', 'mnicholas@albany.edu', 'miken123', True),
-	('Vincent', 'Ballarano', 'vballarano@albany.edu', 'vinnyb123', True)
-;
-
-
-/* Inserting sample publisher -- THIS WILL BE HELPFUL IN DETERMINING WHAT STARTING STOCKS TO INSERT INTO OUR STOCKS TABLE??
-INSERT INTO PUBLISHER (publisher_name, publisher_city)
-VALUES
-	('The Best Publisher', 'Albany, NY'),
-	('J.B. Lippincott & Co.', 'Philadelphia'),
-	('Scribner', 'New York'),
-	('Viking Press', 'New York'),
-	('Little, Brown and Company', 'Boston'),
-	('Scholastic', 'New York')
-    
-    
-;
-
- */
-
-/* CREATING STORED PROCEDURES */
-
-
-/* Login information procedure */
-DELIMITER //
-
-CREATE PROCEDURE loginInfo (IN em VARCHAR(20), IN pw VARCHAR(20))
-BEGIN
-	SELECT user_id FROM user WHERE email = em AND password = pw;
-END //
-DELIMITER ;
