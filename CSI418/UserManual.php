@@ -4,18 +4,15 @@ $_SESSION['timestamp'] = time();
 $_SESSION['inactive'] = false;
 $_SESSION['chosenTicker'] = '';
 $_SESSION['period'] = 7;
-
 //checks to see if the user is actually logged in
 if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true){
     header('location: index.php');
     exit;
 }
-
 if(isset($_GET['uname'])){    
     $uname = $_GET['uname'];
     $_SESSION['uname'] = $uname;
 }  
-
 ?>   
 
 <!DOCTYPE html>
@@ -131,6 +128,9 @@ if(isset($_GET['uname'])){
             <img src ="User_Manual_Images/SubmitQuery.png" class="img-fluid" height ="108" width ="270">  <br>
             Once you have entered and selected a name, you will see the newly created portfolio, in this case, <b>My Portfolio.</b> <br> <br>
             <img src ="User_Manual_Images/PortfolioCreated.png" class="img-fluid" height ="110" width ="170">
+             <p>You can also choose the visibility of your portfolio(s) such as Public and Private. The main difference being that once a Public portfolio is created, they cannot be altered by users other than the one who owns the portfolio(s). Similarly, portfolios that are private are only available for modifications and are viewable <b>only</b> by the original owner. Once you have created a name for your portfolio and have decided on its visibility, your newly created portfolio will be waiting for you to add any assets to it by selecting the <b>“View Portfolios”</b> button where you will be able to view and edit your (private) portfolio(s) and <b>only</b> view other users' public portfolios.  </p>
+                <br>
+        <img src ="User_Manual_Images/publicVsPrivate.png" class="img-fluid" height ="500" width ="300">
          </div>
       </div>
       <br>
@@ -146,7 +146,17 @@ if(isset($_GET['uname'])){
             <br> <img title="Figure 1" src ="User_Manual_Images/Figure1.png" class="img-fluid" height ="38" width ="270">  <br>
             <br> <img title="Figure 2" src ="User_Manual_Images/Figure2.png" class="img-fluid" height ="140" width ="270">  <br>
             <br> <img title="Figure 3" src ="User_Manual_Images/Figure3.png" class="img-fluid" height ="350" width ="240">  
-            <p>Once you have finished adding your desired asset(s), by default the line chart showing the value of the asset(s) can be viewed. If you would like to see a different chart such as a pie chart, bar chart or a high-low chart of specific asset(s), you can navigate to the top left of the screen to choose from the variety of different methods of showing the data over a specific period of time <i>(Figure 4).</i> All the charts can be adjusted based on performance of the asset over a period of time such as <i>All</i> which considers the performance of the asset since the beginning of when the organization first became publicly-traded and an owned entity, a <i>year</i>, <i>YTD</i> (Year-to-Date, a period, starting from the beginning of the current calendar year or fiscal year and continuing up to the present day, <i>six months</i>, <i>three months </i>as well as <i>one month</i>. All of these adjustments for performance can be toggled through the following location at the left side of the screen above the charts being shown <i>(Figure 5).</i> Finally, on the right corner of your screen, (as shown in  <i>(Figure 6).</i> you will see the following 
+             <br>
+             <p>Once you select your desired portfolio, you be prompted with a message indicating that there are currently no assets for comparison since it is a newly created portfolio, it will remain empty until you add specific assets. Upon confirming the message, you will see the following section on the page that will allow you to enter the stock you would like to add to your portfolio as well as indicate the exact number of the specific stock you would like to add. 
+             </p>
+              <img title="Number of Stocks" src ="User_Manual_Images/NumberOfStocks.png" class="img-fluid" height ="350" width ="240">  
+            <p>Along with indicting the number of stocks you can add to the portfolio, you can also specify the date. It is imperative to note that in order to show accurate data, the date selection only goes as far back as 2015/01/01 and as late as 2018/03/26 respectively. Once you have selected your desired stock, the number of stocks you are looking to add as well as the corresponding date range, you will be able to see the following data:
+             </p>
+             <img title="Tabular Data" src ="User_Manual_Images/TabularData.png" class="img-fluid" height ="350" width ="240"> <br>
+             <br>
+             <p>This section indicates the what-if-analysis of particular asset(s). All the existing assets, the number of shares of a particular asset, when the shares were purchased, the latest adjusted price of a single share as well as the overall value all of those shares would have contributed to your total portfolio value in US currency. 
+             </p>
+             <p>When you have finished adding your desired asset(s), by default the line chart showing the value of the asset(s) can be viewed. If you would like to see a different chart such as a pie chart, bar chart or a high-low chart of specific asset(s), you can navigate to the top left of the screen to choose from the variety of different methods of showing the data over a specific period of time <i>(Figure 4).</i> All the charts can be adjusted based on performance of the asset over a period of time such as <i>All</i> which considers the performance of the asset since the beginning of when the organization first became publicly-traded and an owned entity, a <i>year</i>, <i>YTD</i> (Year-to-Date, a period, starting from the beginning of the current calendar year or fiscal year and continuing up to the present day, <i>six months</i>, <i>three months </i>as well as <i>one month</i>. All of these adjustments for performance can be toggled through the following location at the left side of the screen above the charts being shown <i>(Figure 5).</i> Finally, on the right corner of your screen, (as shown in  <i>(Figure 6).</i> you will see the following 
                <img src ="User_Manual_Images/Toggle.png" class="img-fluid" height ="60" width ="60">  
                which will toggle a drop-down menu that lets you view the specific chart in full screen, print the chart, download the chart as PNG, JPEG, PDF or SVG vector image forms for your convenience. 
             </p>
@@ -163,7 +173,6 @@ if(isset($_GET['uname'])){
       <div class="collapse" id="removing">
          <div class="removingBody">
              <!--Removing Asset -->
-             <!--Removing Asset -->
             <b><u>Removing an Asset</u></b>
             <p>You can remove specific asset(s) from your portfolio in a very simple yet intuitive way. From the main log-in page, click or tap on <b>“Portfolios”</b> at the top of the page to get your list of portfolios, from there you can choose to select a specific portfolio by clinking or tapping on <b>“Open My Portfolio in Graphical View”.</b> Once there, using our Facebook example which is already in <b>“My Portfolio” </b>you can choose to remove it by clicking or tapping on <b> “Click to remove FB from Portfolio” </b><i>(Figure 7).</i> Once removed, if there are any other assets in the portfolio, they will automatically adjust and re-fresh their performance data on the charts. </p>
             <br>  <img title="Figure 7" src ="User_Manual_Images/Figure7.png" height ="180" width ="240">  <br>       
@@ -178,7 +187,7 @@ if(isset($_GET['uname'])){
          <div class="understandingBody">
              <!--Charts-->
             <b><u>Understanding our Chart and Analytic Options</u></b>
-            <p>As mentioned before, there are four different types of charts available for you to compare assets in your portfolio(s). A <b>Line Chart </b>is a graphical representation of an asset's historical price action that connects a series of data points with a continuous line. This is the most basic type of chart used in finance and typically only depicts a security's closing prices over time. Since asset prices tend to trend, trendlines that connect the highs or lows in the asset's price history can help identify the current trend and predict what the Asset price might do in the future. The following depicts a line chart using Facebook (FB) and Google (GOOG).</p>
+            <p>As mentioned before, there are several different types of charts available for you to compare assets in your portfolio(s). A <b>Line Chart </b>is a graphical representation of an asset's historical price action that connects a series of data points with a continuous line. This is the most basic type of chart used in finance and typically only depicts a security's closing prices over time. Since asset prices tend to trend, trendlines that connect the highs or lows in the asset's price history can help identify the current trend and predict what the Asset price might do in the future. The following depicts a line chart using Facebook (FB) and Google (GOOG).</p>
             <br>  <img title="Line Chart" src ="User_Manual_Images/Line.png" class="img-fluid" height ="200" width ="700">  <br> 
             <br> 
             <p>A <b>Pie Chart</b> is generally used to show percentage or proportional data and usually the percentage represented by each category is provided next to the corresponding slice of pie. Pie charts are good for displaying data for around 6 categories or fewer. The following depicts a pie chart using Facebook (FB) and Google (GOOG)</p>
@@ -195,15 +204,36 @@ if(isset($_GET['uname'])){
              can be altered easily as shown below. Just select the button below the asset you wish to display labled: "Click to display [Your asset will show here] from Portfolio".</p>
              <img title="High-Low Chart Choice" src ="User_Manual_Images/High-LowChoice.png" class="img-fluid" height ="200" width ="700">
              <br>
-             <p>Finally, our <b>Simple Moving Average Analytic</b>, (see as the black dotted line) similarily to the High-Low Chart, works with one asset at a time (the current asset displayed is changed in the same manner, see instructions above). Simple Moving averages are an arithmetic average calculated by the summation of recent closing prices over a given period of days. By default, the average displayed will be over a period of 7 days, that is to say the price reflected by the Simple Moving Average will be that of the average of the last 7 day's worth of closing prices for the current asset. Behind the simple moving average (seen in black) is a blue candlestick view that demonstrates 4 separate price values over the same period, open, high, low, and closing prices. This is for comparison purposes to draw data between average values and these values at the same time. </p>
+             <p>The <b>Simple Moving Average Analytic</b>, (see as the black dotted line) similarily to the High-Low Chart, works with one asset at a time (the current asset displayed is changed in the same manner, see instructions above). Simple Moving averages are an arithmetic average calculated by the summation of recent closing prices over a given period of days. By default, the average displayed will be over a period of 7 days, that is to say the price reflected by the Simple Moving Average will be that of the average of the last 7 day's worth of closing prices for the current asset. Behind the simple moving average (seen in black) is a blue candlestick view that demonstrates 4 separate price values over the same period, open, high, low, and closing prices. This is for comparison purposes to draw data between average values and these values at the same time. </p>
              <img title="Simple Moving Average" src ="User_Manual_Images/Simple-Moving-Average.png" class="img-fluid" height ="200" width ="700">
              <br>
              <p>  It should be noted that the period can be changed to any value from 1 to 500 using the entry box seen below. </p>
              <img title="Simple Moving Average Period" src ="User_Manual_Images/Simple-Moving-Average-Period.png" class="img-fluid" height ="200" width ="700">
+             <br>
+             <p> The <b>Moving Average Convergence Divergence (MACD) </b> is a trend-following momentum indicator that shows the relationship between two moving averages of an asset's price. The MACD is calculated by subtracting the 26-period Exponential Moving Average (EMA) from the 12-period EMA. The result of that calculation is the MACD line. A nine-day EMA of the MACD called the "signal line," is then plotted on top of the MACD line, which can function as a trigger for buy and sell signals. Traders may buy the asset(s) when the MACD crosses above its signal line and sell the asset(s) when the MACD crosses below the signal line. </p>
+                 <img title="MACD" src ="User_Manual_Images/MACD.png" class="img-fluid" height ="400" width ="700">
+             <br>
+             <p>Finally, the <b>Total Open Line Chart</b> displays the total cost of the portfolio’s contents based on the opening price in a line form. The opening price of an asset is the price at which a security first trades upon the opening of an exchange on a trading day; for example, the New York Stock Exchange (NYSE) opens at precisely 9:30 a.m. Eastern time. The price of the first trade for any listed asset is its daily opening price. </p>
+                 <img title="Total Open Line Chart" src ="User_Manual_Images/TotalOpenLine.png" class="img-fluid" height ="400" width ="700">
+             <br>
          </div>
       </div>
       <br> 
       <br> 
+           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#comparing" aria-expanded="false" aria-controls="comparing">
+      Comparing Portfolios
+      </button>
+      <div class="collapse" id="comparing">
+         <div class="comparingBody">
+             <!--Comparing Portfolios -->
+             <p> You can compare the performance of your private as well as other public portfolios amongst each other. You can compare the contents of two portfolios, it considers the number of assets each portfolio owns, its corresponding shares, when those shares were bought and the total value the shares of those specific assets' contribution hold up to your portfolio. You can perform a portfolio compariosn by navigation to your portfolios page, opening the portfolio in the <b>Graphical View</b>. Once there, you can navigate towards the top of your screen and select <b>"Portfolio Comparison",</b> which will bring you to choose from all of the existing public and private portfolios. You can know click or tap on <b>“Open Test in Portfolio Comparison”</b> which will take you to another screen where you will be able to view all the necessary data in a side-by-side comparison using a <b>Pie Chart. </b> </p>
+             <img title="Comparison Portfolios" src ="User_Manual_Images/comparingPortfolios.png" class="img-fluid" height ="280" width ="400">
+             
+          </div>
+          </div>
+          <br>
+          <br>
+          
       <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#deleting" aria-expanded="false" aria-controls="deleting">
       Deleting Portfolio
       </button>
@@ -273,7 +303,6 @@ if(isset($_GET['uname'])){
              clearTimeout(time);
              time = setTimeout(logout, 900000)
              // 1000 milliseconds = 1 second, so 900000 is 15 minutes
-         }
          };
       </script> 
    </body>
