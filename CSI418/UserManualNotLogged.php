@@ -26,7 +26,7 @@
        
       <br>
       <div class="container">
-         <h4>Trade X User Manual</h4>
+         <h4>trade X User Manual</h4>
       </div>
       <div class="container">
       <!--The User Manual contents --> 
