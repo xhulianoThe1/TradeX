@@ -51,7 +51,7 @@ if(isset($_SESSION['tickerReport'])){
     
     
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
-  <a class="navbar-brand" id="logo" href="homepage.php">Trade X - <?php echo $_SESSION['uname'] ?></a>
+  <a class="navbar-brand" id="logo" href="../homepage.php">Trade X - <?php echo $_SESSION['uname'] ?></a>
    <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
