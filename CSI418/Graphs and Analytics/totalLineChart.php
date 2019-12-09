@@ -370,6 +370,8 @@ $.each(names, function(i, name) {
 		total = combine;
       createChart();
     }
+  }).fail(function(){
+	  alert("Too many API calls have been made, please wait to refresh :)");
   });
 });
 
