@@ -366,6 +366,8 @@ tracker = tracker + 1;
 		y: Tot1
     };
     }
+  }).fail(function(){
+	  alert("Too many API calls have been made, please wait to refresh :)");
   });
 });
 
@@ -396,6 +398,8 @@ $.each(P2, function(i, name) {
       createChart();
     }
             tracker = tracker + 1;
+  }).fail(function(){
+	  alert("Too many API calls have been made, please wait to refresh :)");
   });
 });
 </script>

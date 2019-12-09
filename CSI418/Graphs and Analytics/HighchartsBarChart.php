@@ -313,6 +313,8 @@ $.each(names, function(i, name) {
     if (seriesCounter === names.length) {
       createChart();
     }
+  }).fail(function(){
+	  alert("Too many API calls have been made, please wait to refresh :)");
   });
 });
 
