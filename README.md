@@ -1,4 +1,1 @@
-# CS418
-
-
-CS 418Y Portfolio Management Web Application called TradeX  
+Portfolio Management Web Application called TradeX  
