@@ -1,1 +1,3 @@
-Portfolio Management Web Application called TradeX  
+# Portfolio Management Web Application TradeX  
+
+## Visit http://tradexassets.herokuapp.com
